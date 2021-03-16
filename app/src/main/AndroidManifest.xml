@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tomogatchi2">
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".NamePet"></activity>
-        <activity android:name=".StartingScreen" />
         <activity
             android:name=".Drugstore"
             android:label="@string/title_activity_main2"
@@ -19,7 +19,7 @@
             android:name=".Shop"
             android:label="@string/title_activity_shop"
             android:theme="@style/Theme.Tomogatchi2.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
