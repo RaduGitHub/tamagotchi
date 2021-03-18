@@ -6,7 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="dialog">Dialog</string>
+    <string name="dialog">Not enough money</string>
     <string-array name="foodTypes">
         <item>Pizza</item>
         <item>IceCream</item>
