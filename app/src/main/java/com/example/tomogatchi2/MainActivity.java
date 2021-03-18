@@ -16,10 +16,9 @@ import static com.example.tomogatchi2.Data.MyPREFERENCES;
 import static com.example.tomogatchi2.Data.Name;
 
 public class MainActivity extends AppCompatActivity {
-    int x = 0;
     //public static final String MyPREFERENCES = "MyPrefs" ;
     //public static final String Name = "nameKey";
-
+    TextView Money;
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         TextView t = (TextView)findViewById(R.id.textView2);
         t.setText(petName);
         //Set money on mainscreen
-        TextView Money = (TextView)findViewById(R.id.textView3);
+        Money = (TextView)findViewById(R.id.textView3);
         Money.setText(String.valueOf(sharedPreferences.getInt(Data.Money, 0)));
     }
 
@@ -39,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        TextView Money = (TextView)findViewById(R.id.textView3);
+        Money = (TextView)findViewById(R.id.textView3);
         Money.setText(String.valueOf(sharedPreferences.getInt(Data.Money, 0)));
-
     }
 
     public void IncreaseCoin(View view){
-        TextView t = (TextView)findViewById(R.id.textView3);
-        x = x + 1;
-        t.setText(String.valueOf(x));
+        Money.setText(String.valueOf(Integer.parseInt(Money.getText().toString()) + 1));
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(Data.Money, Integer.parseInt(Money.getText().toString()));
+        editor.commit();
     }
 
     public void ChangeToShop(View view){
