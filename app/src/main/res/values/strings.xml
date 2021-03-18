@@ -7,7 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="dialog">Dialog</string>
-    <string-array name="food_types">
+    <string-array name="foodTypes">
         <item>Pizza</item>
         <item>IceCream</item>
         <item>Fries</item>
