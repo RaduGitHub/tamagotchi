@@ -1,5 +1,6 @@
 package com.example.tomogatchi2;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -43,22 +44,35 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position)
     {
-        holder.food_name_txt.setText(data1[position]);
-        holder.food_price.setText(data2[position]);
+        holder.name_txt.setText(data1[position]);
+        holder.price.setText(data2[position]);
         holder.owned_txt.setText(data3[position]);
-        holder.food_image.setImageResource(images[position]);
+        holder.image.setImageResource(images[position]);
         holder.buyButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
             {
                 //holder.food_name_txt.setText("M-am schimbat bro");
-                holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
-                        getText().toString()) + 1));
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()));
                 int currentMoney = sharedPreferences.getInt(Data.Money, 0);
-                editor.putInt(Data.Money, currentMoney - Integer.parseInt(holder.food_price.getText().toString()));
-                editor.commit();
+                int objectPrice = Integer.parseInt(holder.price.getText().toString());
+
+                if(currentMoney >= objectPrice)
+                {
+
+                    holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
+                            getText().toString()) + 1));
+
+                    editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()));
+
+                    editor.putInt(Data.Money, currentMoney - Integer.parseInt(holder.price.getText().toString()));
+                    editor.commit();
+                }
+                else
+                {
+                    openDialog();
+                }
+
             }
         });
         Log.d("status", "onBindViewHolder: " + data1[position]);
@@ -72,19 +86,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class RecyclerViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView food_name_txt, food_price, owned_txt;
-        ImageView food_image;
+        TextView name_txt, price, owned_txt;
+        ImageView image;
         Button buyButton;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            food_name_txt = itemView.findViewById(R.id.food_name_txt);
-            food_price = itemView.findViewById(R.id.food_price);
-            food_image = itemView.findViewById(R.id.food_image);
+            name_txt = itemView.findViewById(R.id.food_name_txt);
+            price = itemView.findViewById(R.id.food_price);
+            image = itemView.findViewById(R.id.food_image);
             buyButton = itemView.findViewById((R.id.buyButton));
             owned_txt = itemView.findViewById((R.id.owned_food_count));
 
         }
 
+    }
+
+    public void openDialog() {
+        final Dialog dialog = new Dialog(context); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog);
+        dialog.setTitle(R.string.dialog);
+        dialog.show();
     }
 }

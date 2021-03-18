@@ -17,7 +17,7 @@ import android.view.View;
 public class Drugstore extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    String s1[], s2[], s3[];
+    String drugType[], drugPrice[], drugOwned[];
     int images[] = {R.drawable.bandage, R.drawable.pills};
     SharedPreferences sharedPreferences;
 
@@ -32,17 +32,17 @@ public class Drugstore extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView2);
 
 
-                s1 = getResources().getStringArray(R.array.drugs);
+        drugType = getResources().getStringArray(R.array.drugs);
 
-        s2 = new String[2];
-        s2[0] = String.valueOf(sharedPreferences.getInt(Data.BandagePrice, 0));
-        s2[1] = String.valueOf(sharedPreferences.getInt(Data.PillsPrice, 0));
+        drugPrice = new String[2];
+        drugPrice[0] = String.valueOf(sharedPreferences.getInt(Data.BandagePrice, 0));
+        drugPrice[1] = String.valueOf(sharedPreferences.getInt(Data.PillsPrice, 0));
 
-        s3 = new String[2];
-        s3[0] = String.valueOf(sharedPreferences.getInt(Data.Bandage, 0));
-        s3[1] = String.valueOf(sharedPreferences.getInt(Data.Pills, 0));
+        drugOwned = new String[2];
+        drugOwned[0] = String.valueOf(sharedPreferences.getInt(Data.Bandage, 0));
+        drugOwned[1] = String.valueOf(sharedPreferences.getInt(Data.Pills, 0));
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, s1, s2, s3, images);
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, drugType, drugPrice, drugOwned, images);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
