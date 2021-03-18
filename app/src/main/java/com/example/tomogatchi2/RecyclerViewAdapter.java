@@ -1,6 +1,7 @@
 package com.example.tomogatchi2;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>{
 
-    String data1[], data2[];
+    String data1[], data2[], data3[];
     int images[];
     Context context;
+    SharedPreferences sharedPreferences;
 
-    public RecyclerViewAdapter(Context ct, String s1[], String s2[], int images[]){
+    public RecyclerViewAdapter(Context ct, String s1[], String s2[], String s3[], int images[]){
         this.context = ct;
         this.data1 = s1;
         this.data2 = s2;
+        this.data3 = s3;
         this.images = images;
+        sharedPreferences = context.getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
+
     }
 
     @NonNull
@@ -40,6 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     {
         holder.food_name_txt.setText(data1[position]);
         holder.food_price.setText(data2[position]);
+        holder.owned_txt.setText(data3[position]);
         holder.food_image.setImageResource(images[position]);
         holder.buyButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -47,7 +53,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             {
                 //holder.food_name_txt.setText("M-am schimbat bro");
                 holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
-                        getText().toString()) + 1));
+                        getText().toString())));
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String mata = data1[position] + "Key";
+                editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()) + 1);
+                editor.commit();
+
             }
         });
         Log.d("status", "onBindViewHolder: " + data1[position]);

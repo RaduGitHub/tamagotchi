@@ -8,11 +8,11 @@
     <string name="previous">Previous</string>
     <string-array name="food_types">
         <item>Pizza</item>
-        <item>Ice Cream</item>
+        <item>IceCream</item>
         <item>Fries</item>
         <item>Cookie</item>
         <item>Soda</item>
-        <item>Hot Dog</item>
+        <item>HotDog</item>
     </string-array>
 
     <string-array name="food_price">

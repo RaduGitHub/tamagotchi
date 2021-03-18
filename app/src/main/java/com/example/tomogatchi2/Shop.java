@@ -16,7 +16,7 @@ import android.view.View;
 public class Shop extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    String s1[], s2[];
+    String s1[], s2[], s3[];
     int images[] = {R.drawable.pizza, R.drawable.ice_cream, R.drawable.fries, R.drawable.cookie,
             R.drawable.soda, R.drawable.hot_dog};
 
@@ -31,8 +31,9 @@ public class Shop extends AppCompatActivity {
 
         s1 = getResources().getStringArray(R.array.food_types);
         s2 = getResources().getStringArray(R.array.food_price);
+        s3 = getResources().getStringArray(R.array.food_price);
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, s1, s2, images);
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, s1, s2, s3, images);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
