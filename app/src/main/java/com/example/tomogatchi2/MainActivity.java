@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import static com.example.tomogatchi2.Data.MyPREFERENCES;
+import static com.example.tomogatchi2.Data.Name;
+
 public class MainActivity extends AppCompatActivity {
     int x = 0;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-    public static final String Name = "nameKey";
+    //public static final String MyPREFERENCES = "MyPrefs" ;
+    //public static final String Name = "nameKey";
 
     SharedPreferences sharedPreferences;
     @Override
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String petName = sharedPreferences.getString(Name, "default");
+        String petName = sharedPreferences.getString(Name, "nameKey");
         TextView t = (TextView)findViewById(R.id.textView2);
         t.setText(petName);
     }

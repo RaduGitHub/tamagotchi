@@ -53,12 +53,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             {
                 //holder.food_name_txt.setText("M-am schimbat bro");
                 holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
-                        getText().toString())));
+                        getText().toString()) + 1));
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                String mata = data1[position] + "Key";
-                editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()) + 1);
+                editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()));
                 editor.commit();
-
             }
         });
         Log.d("status", "onBindViewHolder: " + data1[position]);

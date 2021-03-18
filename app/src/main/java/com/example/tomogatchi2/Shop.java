@@ -1,5 +1,7 @@
 package com.example.tomogatchi2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +21,7 @@ public class Shop extends AppCompatActivity {
     String s1[], s2[], s3[];
     int images[] = {R.drawable.pizza, R.drawable.ice_cream, R.drawable.fries, R.drawable.cookie,
             R.drawable.soda, R.drawable.hot_dog};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

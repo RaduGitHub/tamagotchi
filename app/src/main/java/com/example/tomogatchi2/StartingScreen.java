@@ -22,9 +22,9 @@ public class StartingScreen extends AppCompatActivity {
         Intent intent;
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String isNamed = sharedPreferences.getString(Name, "default");
+        String isNamed = sharedPreferences.getString(Name, "nameKey");
 
-        if(isNamed.compareTo("default") == 0){
+        if(isNamed.compareTo("nameKey") == 0){
             intent = new Intent(StartingScreen.this, NamePet.class);
         }
         else
@@ -36,3 +36,4 @@ public class StartingScreen extends AppCompatActivity {
         finish();
     }
 }
+
