@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
         String petName = sharedPreferences.getString(Name, "nameKey");
         TextView t = (TextView)findViewById(R.id.textView2);
         t.setText(petName);
+        //Set money on mainscreen
+        TextView Money = (TextView)findViewById(R.id.textView3);
+        Money.setText(String.valueOf(sharedPreferences.getInt(Data.Money, 0)));
+    }
+
+    //Shows the money updates when coming back to the screen
+    @Override
+    protected void onResume(){
+        super.onResume();
+        TextView Money = (TextView)findViewById(R.id.textView3);
+        Money.setText(String.valueOf(sharedPreferences.getInt(Data.Money, 0)));
+
     }
 
     public void IncreaseCoin(View view){

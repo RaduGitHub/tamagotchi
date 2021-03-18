@@ -56,6 +56,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         getText().toString()) + 1));
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()));
+                int currentMoney = sharedPreferences.getInt(Data.Money, 0);
+                editor.putInt(Data.Money, currentMoney - Integer.parseInt(holder.food_price.getText().toString()));
                 editor.commit();
             }
         });
@@ -82,17 +84,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             buyButton = itemView.findViewById((R.id.buyButton));
             owned_txt = itemView.findViewById((R.id.owned_food_count));
 
-//            itemView.findViewById(R.id.buyButton).setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    TextView own = itemView.findViewById(R.id.owned_food_count);
-//                    int x = Integer.parseInt(own.toString()) + 1;
-//                    own.setText(String.valueOf(x));
-//
-//                }
-//            });
         }
 
     }

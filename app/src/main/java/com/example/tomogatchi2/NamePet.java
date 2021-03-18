@@ -46,6 +46,12 @@ public class NamePet extends AppCompatActivity {
 
     protected void populateSharedPreferences(SharedPreferences.Editor editor)
     {
+        //Total items for foodstore and drugstore
+        editor.putInt("FoodstoreTotalItemsKey", 6);
+        editor.putInt("DrugstoreTotalItemsKey", 6);
+        editor.commit();
+
+        //Initialise owned items
         editor.putInt(Data.Pizza, 0);
         editor.putInt(Data.IceCream, 0);
         editor.putInt(Data.Fries, 0);
@@ -56,6 +62,7 @@ public class NamePet extends AppCompatActivity {
         editor.putInt(Data.Pills, 0);
         editor.commit();
 
+        //Initialise price for items
         editor.putInt(Data.PizzaPrice, 5);
         editor.putInt(Data.IceCreamPrice, 10);
         editor.putInt(Data.FriesPrice, 20);
@@ -64,6 +71,10 @@ public class NamePet extends AppCompatActivity {
         editor.putInt(Data.HotDogPrice, 250);
         editor.putInt(Data.BandagePrice, 50);
         editor.putInt(Data.PillsPrice, 150);
+        editor.commit();
+
+        //Initialise player money
+        editor.putInt(Data.Money, 500);
         editor.commit();
 
     }

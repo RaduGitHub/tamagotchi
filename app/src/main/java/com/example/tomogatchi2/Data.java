@@ -10,6 +10,9 @@ public class Data {
     //pet name
     public static final String Name = "nameKey";
 
+    //Money
+    public static final String Money = "MoneyKey";
+
     //foodstore total items
     public static final String FoodstoreTotalItems = "FoodstoreTotalItemsKey";
 
