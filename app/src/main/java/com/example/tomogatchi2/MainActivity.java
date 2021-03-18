@@ -59,4 +59,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Drugstore.class);
         startActivity(intent);
     }
+
+    public void ChangeToCharacteristics(View view)
+    {
+        Intent intent = new Intent(this, Characteristics.class);
+        startActivity(intent);
+    }
 }

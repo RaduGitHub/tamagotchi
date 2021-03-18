@@ -3,15 +3,16 @@
     package="com.example.tomogatchi2">
 
     <application
+        android:name=".MyContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MyContext"
         android:theme="@style/Theme.Tomogatchi2">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".NamePet"></activity>
+        <activity android:name=".Characteristics"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".NamePet" />
         <activity
             android:name=".Drugstore"
             android:label="@string/title_activity_main2"
