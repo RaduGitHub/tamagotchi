@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         TextView t = (TextView)findViewById(R.id.textView2);
         t.setText(petName);
         //Set money on mainscreen
-        Money = (TextView)findViewById(R.id.textView3);
-        Money.setText(String.valueOf(sharedPreferences.getInt(Data.Money, 0)));
     }
 
     //Shows the money updates when coming back to the screen
