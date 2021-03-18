@@ -48,7 +48,7 @@ public class NamePet extends AppCompatActivity {
     {
         //Total items for foodstore and drugstore
         editor.putInt("FoodstoreTotalItemsKey", 6);
-        editor.putInt("DrugstoreTotalItemsKey", 6);
+        editor.putInt("DrugstoreTotalItemsKey", 2);
         editor.commit();
 
         //Initialise owned items

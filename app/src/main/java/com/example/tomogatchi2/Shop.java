@@ -18,10 +18,10 @@ import android.view.View;
 public class Shop extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    String s1[], s2[], s3[];
+    String foodType[], foodPrice[], foodOwned[];
     int images[] = {R.drawable.pizza, R.drawable.ice_cream, R.drawable.fries, R.drawable.cookie,
             R.drawable.soda, R.drawable.hot_dog};
-
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,29 @@ public class Shop extends AppCompatActivity {
         setContentView(R.layout.activity_shop);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sharedPreferences = getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        s1 = getResources().getStringArray(R.array.food_types);
-        s2 = getResources().getStringArray(R.array.food_price);
-        s3 = getResources().getStringArray(R.array.food_price);
+        foodType = getResources().getStringArray(R.array.foodTypes);
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, s1, s2, s3, images);
+        foodPrice = new String[sharedPreferences.getInt(Data.FoodstoreTotalItems, 0)];
+        foodPrice[0] = String.valueOf(sharedPreferences.getInt(Data.PizzaPrice, 0));
+        foodPrice[1] = String.valueOf(sharedPreferences.getInt(Data.IceCreamPrice, 0));
+        foodPrice[2] = String.valueOf(sharedPreferences.getInt(Data.FriesPrice, 0));
+        foodPrice[3] = String.valueOf(sharedPreferences.getInt(Data.CookiePrice, 0));
+        foodPrice[4] = String.valueOf(sharedPreferences.getInt(Data.SodaPrice, 0));
+        foodPrice[5] = String.valueOf(sharedPreferences.getInt(Data.HotDogPrice, 0));
+
+        foodOwned = new String[sharedPreferences.getInt(Data.FoodstoreTotalItems, 0)];
+        foodOwned[0] = String.valueOf(sharedPreferences.getInt(Data.Pizza, 0));
+        foodOwned[1] = String.valueOf(sharedPreferences.getInt(Data.IceCream, 0));
+        foodOwned[2] = String.valueOf(sharedPreferences.getInt(Data.Fries, 0));
+        foodOwned[3] = String.valueOf(sharedPreferences.getInt(Data.Cookie, 0));
+        foodOwned[4] = String.valueOf(sharedPreferences.getInt(Data.Soda, 0));
+        foodOwned[5] = String.valueOf(sharedPreferences.getInt(Data.HotDog, 0));
+
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, foodType, foodPrice, foodOwned, images);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

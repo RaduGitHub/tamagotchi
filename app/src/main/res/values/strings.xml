@@ -6,7 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string-array name="food_types">
+    <string-array name="foodTypes">
         <item>Pizza</item>
         <item>IceCream</item>
         <item>Fries</item>

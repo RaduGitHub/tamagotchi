@@ -32,7 +32,7 @@ public class Drugstore extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView2);
 
 
-                s1 = getResources().getStringArray(R.array.drugs);
+        s1 = getResources().getStringArray(R.array.drugs);
 
         s2 = new String[2];
         s2[0] = String.valueOf(sharedPreferences.getInt(Data.BandagePrice, 0));
