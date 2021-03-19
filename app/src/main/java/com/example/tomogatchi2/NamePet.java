@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class NamePet extends AppCompatActivity {
 
     Button b1;
@@ -50,6 +52,14 @@ public class NamePet extends AppCompatActivity {
         //Total items for foodstore and drugstore
         editor.putInt("FoodstoreTotalItemsKey", 6);
         editor.putInt("DrugstoreTotalItemsKey", 2);
+        editor.commit();
+
+        //Initialise pet caracteristics
+        editor.putInt(Data.Weight, new Random().nextInt(61) + 40);
+        editor.putInt(Data.Height, new Random().nextInt(101) + 100);
+        editor.putInt(Data.DaysAlive, 0);
+        editor.putInt(Data.Happiness, 50);
+        editor.putInt(Data.Health, 100);
         editor.commit();
 
         //Initialise owned items
