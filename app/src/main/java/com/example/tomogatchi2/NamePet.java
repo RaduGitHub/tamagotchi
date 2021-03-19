@@ -46,6 +46,7 @@ public class NamePet extends AppCompatActivity {
 
     protected void populateSharedPreferences(SharedPreferences.Editor editor)
     {
+        Data.fragments = 0;
         //Total items for foodstore and drugstore
         editor.putInt("FoodstoreTotalItemsKey", 6);
         editor.putInt("DrugstoreTotalItemsKey", 2);

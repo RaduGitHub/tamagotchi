@@ -1,6 +1,9 @@
 package com.example.tomogatchi2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,15 +23,16 @@ public class MainActivity extends AppCompatActivity {
     //public static final String Name = "nameKey";
     TextView Money;
     SharedPreferences sharedPreferences;
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String petName = sharedPreferences.getString(Name, "nameKey");
-        TextView t = (TextView)findViewById(R.id.textView2);
-        t.setText(petName);
+        //String petName = sharedPreferences.getString(Name, "nameKey");
+        //TextView t = (TextView)findViewById(R.id.textView2);
+        //t.setText(petName);
         //Set money on mainscreen
     }
 
@@ -41,10 +45,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void IncreaseCoin(View view){
+
         Money.setText(String.valueOf(Integer.parseInt(Money.getText().toString()) + 1));
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(Data.Money, Integer.parseInt(Money.getText().toString()));
         editor.commit();
+        i++;
+        if(i%5 == 0)
+        {
+            walk();
+        }
     }
 
     public void ChangeToShop(View view){
@@ -61,5 +71,43 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, Characteristics.class);
         startActivity(intent);
+    }
+
+    public void walk()
+    {
+        StepCounter fragment = StepCounter.newInstance();
+        addFragment(fragment);
+
+    }
+
+    public void addFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        switch(Data.fragments)
+        {
+            case 0:
+                fragmentTransaction.add(R.id.fragment_container_view0, fragment).addToBackStack(null);
+                break;
+            case 1:
+                fragmentTransaction.add(R.id.fragment_container_view1, fragment).addToBackStack(null);
+                break;
+            case 2:
+                fragmentTransaction.add(R.id.fragment_container_view2, fragment).addToBackStack(null);
+                break;
+            case 3:
+                fragmentTransaction.add(R.id.fragment_container_view3, fragment).addToBackStack(null);
+                break;
+            case 4:
+                fragmentTransaction.add(R.id.fragment_container_view4, fragment).addToBackStack(null);
+                break;
+            default:
+                break;
+        }
+
+        Data.fragments += 1;
+        fragmentTransaction.commit();
+
     }
 }

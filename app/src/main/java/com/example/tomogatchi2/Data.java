@@ -45,4 +45,6 @@ public class Data {
 
     public static final String Default = "default";
 
+    public static int fragments;
+
 }
