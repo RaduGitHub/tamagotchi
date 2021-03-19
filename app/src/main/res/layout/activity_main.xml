@@ -28,72 +28,15 @@
     <FrameLayout
         android:id="@+id/fragment_container_view0"
         android:name="StepFragment"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="45dp"
+        android:layout_width="311dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
-        tools:layout="@layout/step_counter_fragment" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container_view1"
-        android:name="StepFragment"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragment_container_view0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
-        tools:layout="@layout/step_counter_fragment" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container_view2"
-        android:name="StepFragment"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragment_container_view1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
-        tools:layout="@layout/step_counter_fragment" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container_view3"
-        android:name="StepFragment"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragment_container_view2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166"
-        tools:layout="@layout/step_counter_fragment" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container_view4"
-        android:name="StepFragment"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragment_container_view3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
+        app:layout_constraintVertical_bias="0.245"
         tools:layout="@layout/step_counter_fragment" />
 
     <Button
@@ -171,5 +114,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.100000024" />
+
+    <ImageButton
+        android:id="@+id/imageButton0"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/steps"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.161" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

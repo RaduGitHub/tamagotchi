@@ -36,6 +36,9 @@ public class StepCounter extends DialogFragment implements SensorEventListener {
     {
         View view = inflater.inflate(R.layout.step_counter_fragment, container, false);
         Context context = MyContext.getAppContext();
+
+        onClick();
+        text = view.findViewById(R.id.textView5);
         return view;
     }
 
@@ -68,6 +71,7 @@ public class StepCounter extends DialogFragment implements SensorEventListener {
         if(sensorEvent.sensor == stepSensor)
         {
             totalSteps = sensorEvent.values[0];
+            text.setText(String.valueOf(totalSteps));
         }
 
     }
@@ -95,4 +99,10 @@ public class StepCounter extends DialogFragment implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
+    public void onClick()
+    {
+
+    }
+
 }
