@@ -6,4 +6,173 @@
     android:layout_height="match_parent"
     tools:context=".Characteristics">
 
+    <TextView
+        android:id="@+id/weightCaracterProp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="20dp"
+        android:text="Weight"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/weightCaracter"
+        app:layout_constraintTop_toBottomOf="@+id/heightCaracterProp" />
+
+    <TextView
+        android:id="@+id/daysAliveProp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="20dp"
+        android:text="DaysAlive"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/daysAlive"
+        app:layout_constraintTop_toBottomOf="@+id/weightCaracterProp" />
+
+    <TextView
+        android:id="@+id/hapinessProp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:text="Happiness"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/happinessCaracter"
+        app:layout_constraintTop_toBottomOf="@+id/daysAliveProp" />
+
+    <TextView
+        android:id="@+id/healthProp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="20dp"
+        android:text="Health"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/healthCaracter"
+        app:layout_constraintTop_toBottomOf="@+id/hapinessProp" />
+
+    <TextView
+        android:id="@+id/heightCaracterProp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="20dp"
+        android:text="Height"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/heightCaracter"
+        app:layout_constraintTop_toBottomOf="@+id/nameCaracterProp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="170dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginBottom="613dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cho_squish" />
+
+    <TextView
+        android:id="@+id/nameCaracter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="220dp"
+        android:text="Name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameCaracterProp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="220dp"
+        android:text="Name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/nameCaracter"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/heightCaracter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Height"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameCaracter" />
+
+    <TextView
+        android:id="@+id/weightCaracter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Weight"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heightCaracter" />
+
+    <TextView
+        android:id="@+id/daysAlive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Days Alive"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightCaracter" />
+
+    <TextView
+        android:id="@+id/happinessCaracter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Happiness"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daysAlive" />
+
+    <TextView
+        android:id="@+id/healthCaracter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Health"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/happinessCaracter" />
+
+    <TextView
+        android:id="@+id/coinCaracter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Coins"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/healthCaracter" />
+
+    <TextView
+        android:id="@+id/coinsCaracterProp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:text="0"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/coinCaracter"
+        app:layout_constraintTop_toBottomOf="@+id/healthProp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

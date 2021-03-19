@@ -7,8 +7,13 @@ public class Data {
     //sharedpreferences header
     public static final String MyPREFERENCES = "MyPrefs" ;
 
-    //pet name
+    //Pet Caracteristics
     public static final String Name = "nameKey";
+    public static final String Height = "HeightKey";
+    public static final String Weight = "WeightKey";
+    public static final String DaysAlive = "DaysAliveKey";
+    public static final String Happiness = "HappinessKey";
+    public static final String Health = "HealthKey";
 
     //Money
     public static final String Money = "MoneyKey";
