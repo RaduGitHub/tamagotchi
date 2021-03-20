@@ -60,6 +60,7 @@ public class NamePet extends AppCompatActivity {
         editor.putInt(Data.DaysAlive, 0);
         editor.putInt(Data.Happiness, 50);
         editor.putInt(Data.Health, 100);
+        editor.putLong(Data.DayBorn, System.currentTimeMillis());
         editor.commit();
 
         //Initialise owned items

@@ -14,6 +14,7 @@ public class Data {
     public static final String DaysAlive = "DaysAliveKey";
     public static final String Happiness = "HappinessKey";
     public static final String Health = "HealthKey";
+    public static final String DayBorn = "DayBornKey";
 
     //Money
     public static final String Money = "MoneyKey";

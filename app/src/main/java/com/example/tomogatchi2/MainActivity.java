@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static com.example.tomogatchi2.Data.MyPREFERENCES;
 import static com.example.tomogatchi2.Data.Name;
 
@@ -64,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt(Data.Money, Integer.parseInt(Money.getText().toString()));
         editor.commit();
 
+/*        long startTime = System.currentTimeMillis();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(startTime);
+
+        System.out.println(formatter.format(calendar.getTime()));*/
 
         i++;
         if(i%5 == 0)
