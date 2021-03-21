@@ -88,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void ChangeToGameSelector(View view)
+    {
+        Intent intent = new Intent(this, GameSelector.class);
+        startActivity(intent);
+    }
+
     public void addFragment(Fragment fragment)
     {
 
