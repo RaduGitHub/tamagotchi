@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        fragment = StepCounter.newInstance();
+        fragment = new StepCounter();
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
