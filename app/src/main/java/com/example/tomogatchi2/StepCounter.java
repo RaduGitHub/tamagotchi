@@ -12,14 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.view.WindowManager;
 
 import androidx.fragment.app.DialogFragment;
 
 import org.w3c.dom.Text;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class StepCounter extends DialogFragment implements SensorEventListener {
 
-    SensorManager sensorManager;
+
+    private TextView stepCounter;
+    private TextView stepDetector;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private View view;
 
     boolean running = false;
     float totalSteps = 0f;
@@ -34,7 +42,7 @@ public class StepCounter extends DialogFragment implements SensorEventListener {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.step_counter_fragment, container, false);
+        view = inflater.inflate(R.layout.step_counter_fragment, container, false);
         Context context = MyContext.getAppContext();
 
         onClick();
@@ -50,6 +58,9 @@ public class StepCounter extends DialogFragment implements SensorEventListener {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        //stepCounter = view.findViewById(R.id.textView5);
+
         super.onCreate(savedInstanceState);
         Context context = MyContext.getAppContext();
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -66,11 +77,27 @@ public class StepCounter extends DialogFragment implements SensorEventListener {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        if (sensor != null) {
+            sensorManager.registerListener(this, sensor,
+                    Sensor.TYPE_STEP_COUNTER);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         if(sensorEvent.sensor == stepSensor)
         {
-            totalSteps = sensorEvent.values[0];
+            totalSteps = (int)sensorEvent.values[0];
             text.setText(String.valueOf(totalSteps));
         }
 
