@@ -79,8 +79,8 @@ public class Game1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final int randomX = new Random().nextInt(width);
-                final int randomY = new Random().nextInt(height);
+                final int randomX = new Random().nextInt(width - 50);
+                final int randomY = new Random().nextInt(height - 50);
 
                 button.animate().x(randomX).y(randomY);
 
