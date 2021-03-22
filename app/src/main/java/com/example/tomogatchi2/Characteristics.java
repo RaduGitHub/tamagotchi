@@ -36,7 +36,7 @@ public class Characteristics extends AppCompatActivity {
 
         //Set DaysAlive
         daysAlive = findViewById(R.id.daysAliveProp);
-        daysAlive.setText(String.valueOf(System.currentTimeMillis() - sharedPreferences.getLong(Data.DayBorn, 0)));
+        daysAlive.setText(String.valueOf(sharedPreferences.getInt(Data.DaysAlive, 0)));
 
         //Set Health
         health = findViewById(R.id.healthProp);
