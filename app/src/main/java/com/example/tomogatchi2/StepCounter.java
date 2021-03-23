@@ -50,16 +50,14 @@ public class StepCounter extends Fragment implements SensorEventListener {
             counterSensor = true;
         }
         else{
-            stepCounter.setText("Counter sensor is not present");
+            stepCounter.setText("Counter sensor is not working properly");
             counterSensor = false;
         }
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         if (sensor != null) {
             sensorManager.registerListener(this, sensor,
                     Sensor.TYPE_STEP_COUNTER);
@@ -97,12 +95,10 @@ public class StepCounter extends Fragment implements SensorEventListener {
     @Override
     public void onPause(){
         super.onPause();
-
         if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
             sensorManager.unregisterListener(this, sensor);
         }
     }
-
 }
 
 

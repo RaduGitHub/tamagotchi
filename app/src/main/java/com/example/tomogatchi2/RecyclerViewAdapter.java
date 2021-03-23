@@ -48,6 +48,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.price.setText(data2[position]);
         holder.owned_txt.setText(data3[position]);
         holder.image.setImageResource(images[position]);
+        holder.useButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
+                        getText().toString()) - 1));
+                editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.
+                        getText().toString()));
+                editor.commit();
+            }
+        });
         holder.buyButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
@@ -63,16 +74,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
                             getText().toString()) + 1));
 
-                    editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.getText().toString()));
+                    editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.
+                            getText().toString()));
 
-                    editor.putInt(Data.Money, currentMoney - Integer.parseInt(holder.price.getText().toString()));
+                    editor.putInt(Data.Money, currentMoney - Integer.parseInt(holder.price.
+                            getText().toString()));
                     editor.commit();
                 }
                 else
                 {
                     openDialog();
                 }
-
             }
         });
         Log.d("status", "onBindViewHolder: " + data1[position]);
@@ -89,15 +101,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView name_txt, price, owned_txt;
         ImageView image;
         Button buyButton;
+        Button useButton;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             name_txt = itemView.findViewById(R.id.food_name_txt);
             price = itemView.findViewById(R.id.food_price);
             image = itemView.findViewById(R.id.food_image);
-            buyButton = itemView.findViewById((R.id.buyButton));
-            owned_txt = itemView.findViewById((R.id.owned_food_count));
-
+            buyButton = itemView.findViewById(R.id.buyButton);
+            useButton = itemView.findViewById(R.id.useButton);
+            owned_txt = itemView.findViewById(R.id.owned_food_count);
         }
 
     }
