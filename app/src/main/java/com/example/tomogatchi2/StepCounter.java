@@ -90,7 +90,7 @@ public class StepCounter extends Fragment implements SensorEventListener {
     public void onResume(){
         super.onResume();
         if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
         }
     }
 
