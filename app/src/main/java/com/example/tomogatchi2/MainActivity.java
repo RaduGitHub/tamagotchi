@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     boolean foodActive = false;
     boolean sleepActive = false;
     boolean sickActive = false;
+    boolean cleanActive = false;
     StepCounter fragment;
 
     Handler happinesHandler = new Handler();
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void walkButton()
     {
-        ImageButton bt = findViewById(R.id.imageButton0);
+        ImageButton bt = findViewById(R.id.imageButton);
         bt.setVisibility(View.VISIBLE);
         bt.setOnClickListener(new View.OnClickListener()
         {
@@ -151,27 +152,60 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.show(fragment);
                 Data.fragments += 1;
                 fragmentTransaction.commit();
-                walkButtonUndo();
             }
         });
     }
 
-    public void walkButtonUndo(){
-        ImageButton bt = findViewById(R.id.imageButton0);
-
+    public void sleepButton()
+    {
+        ImageButton bt = findViewById(R.id.imageButton3);
+        bt.setVisibility(View.VISIBLE);
         bt.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.hide(fragment);
-                bt.setVisibility(View.INVISIBLE);
-                fragmentTransaction.commit();
+                // to do //
             }
         });
+    }
 
+    public void sickButton()
+    {
+        ImageButton bt = findViewById(R.id.imageButton0);
+        bt.setVisibility(View.VISIBLE);
+        bt.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                // to do //
+            }
+        });
+    }
+
+    public void cleanButton()
+    {
+        ImageButton bt = findViewById(R.id.imageButton4);
+        bt.setVisibility(View.VISIBLE);
+        bt.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                // to do //
+            }
+        });
+    }
+
+    public void foodButton()
+    {
+        ImageButton bt = findViewById(R.id.imageButton5);
+        bt.setVisibility(View.VISIBLE);
+        bt.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                // to do //
+            }
+        });
     }
 
 
@@ -234,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
         WalkEventCheck();
         SickEventCheck();
         SleepEventCheck();
+        CleanEventCheck();
     }
 
 
@@ -247,24 +282,28 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MANCARE ", " random = " + i);
                 foodActive = true;
                 foodCounter = 0;
+                foodButton();
             }
             else if(foodCounter >= 6 && foodCounter < 8 && time <= 25)
             {
                 Log.d("MANCARE ", " random = " + i);
                 foodActive = true;
                 foodCounter = 0;
+                foodButton();
             }
             else if(foodCounter >= 8 && foodCounter < 10 && time <= 50)
             {
                 Log.d("MANCARE ", " random = " + i);
                 foodActive = true;
                 foodCounter = 0;
+                foodButton();
             }
             else if(foodCounter == 10)
             {
                 Log.d("MANCARE ", " random = " + i);
                 foodActive = true;
                 foodCounter = 0;
+                foodButton();
             }
         }
 
@@ -315,18 +354,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("SICK ", " random = " + i);
                 sickActive = true;
                 sickCounter = 0;
+                sickButton();
             }
             else if(sickCounter >= 2160 && sickCounter < 4320 && time <= 25)
             {
                 Log.d("SICK ", " random = " + i);
                 sickActive = true;
                 sickCounter = 0;
+                sickButton();
             }
             else if(sickCounter >= 4320 && time <= 50)
             {
                 Log.d("SICK ", " random = " + i);
                 sickActive = true;
                 sickCounter = 0;
+                sickButton();
             }
         }
     }
@@ -341,24 +383,55 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("SOMN ", " random = " + i);
                 sleepActive = true;
                 sleepCounter = 0;
+                sleepButton();
             }
             else if(sleepCounter >= 8 && sleepCounter < 16 && time <= 25)
             {
                 Log.d("SOMN ", " random = " + i);
                 sleepActive = true;
                 sleepCounter = 0;
+                sleepButton();
             }
             else if(sleepCounter >= 16 && sleepCounter < 24 && time <= 50)
             {
                 Log.d("SOMN ", " random = " + i);
                 sleepActive = true;
                 sleepCounter = 0;
+                sleepButton();
             }
             else if(sleepCounter >= 24)
             {
                 Log.d("SOMN ", " random = " + i);
                 sleepActive = true;
                 sleepCounter = 0;
+                sleepButton();
+            }
+        }
+    }
+
+    public void CleanEventCheck() {
+        if (!cleanActive) {
+            int time = randomTime.nextInt(100);
+            if (cleanCounter < 24 && time < 10) {
+                Log.d("Clean ", " random = " + i);
+                cleanActive = true;
+                cleanCounter = 0;
+                cleanButton();
+            } else if (cleanCounter >= 24 && cleanCounter < 48 && time <= 25) {
+                Log.d("Clean ", " random = " + i);
+                cleanActive = true;
+                cleanCounter = 0;
+                cleanButton();
+            } else if (cleanCounter >= 48 && cleanCounter < 96 && time <= 50) {
+                Log.d("Clean ", " random = " + i);
+                cleanActive = true;
+                cleanCounter = 0;
+                cleanButton();
+            } else if (cleanCounter >= 96) {
+                Log.d("Clean ", " random = " + i);
+                cleanActive = true;
+                cleanCounter = 0;
+                cleanButton();
             }
         }
     }

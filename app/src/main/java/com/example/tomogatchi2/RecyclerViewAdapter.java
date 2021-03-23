@@ -56,7 +56,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         getText().toString()) - 1));
                 editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.
                         getText().toString()));
+
+                int happiness = sharedPreferences.getInt(Data.Happiness, 0);
+                int happinessToAdd = sharedPreferences.getInt(data1[position] + "HappyKey", 0);
+                Log.d("xxx", "onClick: " + happinessToAdd);
+                if(happiness < 100)
+                {
+                    happiness  = happiness + happinessToAdd;
+                    editor.putInt(Data.Happiness, happiness);
+                }
                 editor.commit();
+
             }
         });
         holder.buyButton.setOnClickListener(new View.OnClickListener(){

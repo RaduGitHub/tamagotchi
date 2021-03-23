@@ -119,12 +119,60 @@
         android:id="@+id/imageButton0"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:background="@drawable/steps"
+        android:background="@drawable/boxtissue"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/steps"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton0"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="35dp"
+        android:background="@drawable/bed"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton0"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="35dp"
+        android:background="@drawable/bath"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton3"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/burger"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.161" />
 

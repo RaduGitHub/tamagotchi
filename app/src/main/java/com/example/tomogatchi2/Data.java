@@ -38,6 +38,13 @@ public class Data {
     public static final String SodaPrice = "SodaPriceKey";
     public static final String HotDogPrice = "HotDogPriceKey";
 
+    public static final String PizzaHappy = "PizzaHappyKey";
+    public static final String IceCreamHappy = "IceCreamHappyKey";
+    public static final String FriesHappy = "FriesHappyKey";
+    public static final String CookieHappy = "CookieHappyKey";
+    public static final String SodaHappy = "SodaHappyKey";
+    public static final String HotDogHappy = "HotDogHappyKey";
+
     //drugstore total items
     public static final String DrugstoreTotalItems = "DrugstoreTotalItemsKey";
 
@@ -48,6 +55,9 @@ public class Data {
     //drugs prices
     public static final String BandagePrice = "BandagePriceKey";
     public static final String PillsPrice = "PillsPriceKey";
+
+    public static final String BandageHappy = "BandageHappyKey";
+    public static final String PillsHappy = "PillsHappyKey";
 
     public static final String Default = "default";
 

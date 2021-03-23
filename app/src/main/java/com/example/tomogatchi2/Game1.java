@@ -126,8 +126,8 @@ public class Game1 extends AppCompatActivity {
             public void onClick(View v) {
                 points += 1;
                 score.setText(String.valueOf(points));
-                final int randomX = new Random().nextInt(width - 100);
-                final int randomY = new Random().nextInt(height - 100);
+                final int randomX = new Random().nextInt(width - 200);
+                final int randomY = new Random().nextInt(height - 300);
 
                 button.animate().x(randomX).y(randomY);
             }

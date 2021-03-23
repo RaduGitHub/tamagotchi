@@ -85,6 +85,17 @@ public class NamePet extends AppCompatActivity {
         editor.putInt(Data.PillsPrice, 150);
         editor.commit();
 
+        //Initialise price for items
+        editor.putInt(Data.PizzaHappy, 1);
+        editor.putInt(Data.IceCreamHappy, 2);
+        editor.putInt(Data.FriesHappy, 5);
+        editor.putInt(Data.CookieHappy, 7);
+        editor.putInt(Data.SodaHappy, 10);
+        editor.putInt(Data.HotDogHappy, 12);
+        editor.putInt(Data.BandageHappy, 5);
+        editor.putInt(Data.PillsHappy, 10);
+        editor.commit();
+
         //Initialise player money
         editor.putInt(Data.Money, 500);
         editor.commit();
