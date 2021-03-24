@@ -20,9 +20,9 @@ public class GameSelector extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void WIPgame(View view)
+    public void ChangeToGame2(View view)
     {
-        /*Intent intent = new Intent(this, Game2.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, Game2.class);
+        startActivity(intent);
     }
 }

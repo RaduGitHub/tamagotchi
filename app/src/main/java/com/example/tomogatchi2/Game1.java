@@ -110,6 +110,11 @@ public class Game1 extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+
+                        startTime = System.currentTimeMillis();
+                        timerHandler.postDelayed(timerRunnable, 0);
+                        timerTextView.setVisibility(View.VISIBLE);
+
                     }
                 })
                 .show();
@@ -130,22 +135,6 @@ public class Game1 extends AppCompatActivity {
                 final int randomY = new Random().nextInt(height - 300);
 
                 button.animate().x(randomX).y(randomY);
-            }
-        });
-
-
-        Button b = (Button) findViewById(R.id.button3);
-        b.setText("start");
-        b.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Button b = (Button) v;
-
-                startTime = System.currentTimeMillis();
-                timerHandler.postDelayed(timerRunnable, 0);
-                b.setVisibility(View.INVISIBLE);
-                timerTextView.setVisibility(View.VISIBLE);
             }
         });
 
