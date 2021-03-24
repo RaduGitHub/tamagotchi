@@ -1,5 +1,6 @@
 package com.example.tomogatchi2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,11 +21,13 @@ public class Drugstore extends AppCompatActivity {
     String drugType[], drugPrice[], drugOwned[];
     int images[] = {R.drawable.bandage, R.drawable.pills};
     SharedPreferences sharedPreferences;
+    Activity thisActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        thisActivity = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
@@ -42,7 +45,8 @@ public class Drugstore extends AppCompatActivity {
         drugOwned[0] = String.valueOf(sharedPreferences.getInt(Data.Bandage, 0));
         drugOwned[1] = String.valueOf(sharedPreferences.getInt(Data.Pills, 0));
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, drugType, drugPrice, drugOwned, images);
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, drugType, drugPrice,
+                drugOwned, images, thisActivity);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

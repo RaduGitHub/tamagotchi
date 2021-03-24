@@ -1,5 +1,6 @@
 package com.example.tomogatchi2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,11 +23,13 @@ public class Shop extends AppCompatActivity {
     int images[] = {R.drawable.pizza, R.drawable.ice_cream, R.drawable.fries, R.drawable.cookie,
             R.drawable.soda, R.drawable.hot_dog};
     SharedPreferences sharedPreferences;
+    Activity thisActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+        thisActivity = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
@@ -51,7 +54,8 @@ public class Shop extends AppCompatActivity {
         foodOwned[4] = String.valueOf(sharedPreferences.getInt(Data.Soda, 0));
         foodOwned[5] = String.valueOf(sharedPreferences.getInt(Data.HotDog, 0));
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, foodType, foodPrice, foodOwned, images);
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, foodType, foodPrice,
+                foodOwned, images, thisActivity);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
