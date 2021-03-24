@@ -4,11 +4,11 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/dialog_info"
+        android:id="@+id/dialog_info3"
         android:layout_width="320sp"
         android:layout_height="80sp"
         android:padding="10dp"
-        android:text="Not enough money"
+        android:text="You've just cared your pet. He is no longer sick."
         android:textAlignment="center"
         android:textSize="20sp"
         android:gravity="center"

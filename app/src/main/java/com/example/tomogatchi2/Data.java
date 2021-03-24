@@ -4,6 +4,14 @@ import android.content.SharedPreferences;
 
 public class Data {
 
+    public static boolean stepsActive = false;
+    public static boolean foodActive = false;
+    public static boolean sleepActive = false;
+    public static boolean sickActive = false;
+    public static boolean cleanActive = false;
+    public static boolean feeding = false;
+    public static boolean caring = false;
+
     //sharedpreferences header
     public static final String MyPREFERENCES = "MyPrefs" ;
 

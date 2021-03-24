@@ -33,14 +33,9 @@ public class MainActivity extends AppCompatActivity {
     TextView Money;
     SharedPreferences sharedPreferences;
     Context context;
-    boolean stepsActive = false;
-    boolean foodActive = false;
-    boolean sleepActive = false;
-    boolean sickActive = false;
-    boolean cleanActive = false;
+
     StepCounter fragment;
 
-    Handler happinesHandler = new Handler();
     Handler eventHandler = new Handler();
 
     Random randomTime = new Random();
@@ -68,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         addFragment(fragment);
 
 
-        happinesHandler.postDelayed(happinesController, 0);
         eventHandler.postDelayed(eventController, 0);
 
     }
@@ -223,23 +217,18 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private Runnable happinesController = new Runnable()
+    public void happinessController()
     {
-        public void run()
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int happiness = sharedPreferences.getInt(Data.Happiness, 0);
+        Log.d("HAPPENED", "happy " + happiness);
+        if(happiness > 1)
         {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            int happiness = sharedPreferences.getInt(Data.Happiness, 0);
-            Log.d("HAPPENED", "happy " + happiness);
-            if(happiness > 1)
-            {
-                happiness  = happiness - 1;
-                editor.putInt(Data.Happiness, happiness);
-            }
-            editor.commit();
-
-            happinesHandler.postDelayed(this, 10000);
+            happiness  = happiness - 1;
+            editor.putInt(Data.Happiness, happiness);
         }
-    };
+        editor.commit();
+    }
 
     private Runnable eventController = new Runnable()
     {
@@ -247,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
         {
             incrementEventTimers();
             EventsCheck();
+            happinessController();
             i++;
 
             eventHandler.postDelayed(this, 1000);
@@ -255,11 +245,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void incrementEventTimers()
     {
-        this.sleepCounter++;
-        this.foodCounter++;
-        this.walkCounter++;
-        this.sickCounter++;
-        this.cleanCounter++;
+        if(Data.sleepActive == false)
+        {
+            this.sleepCounter++;
+        }
+
+        if(Data.foodActive == false)
+        {
+            this.foodCounter++;
+        }
+
+        if(Data.stepsActive == false)
+        {
+            this.walkCounter++;
+        }
+
+        if(Data.sickActive == false)
+        {
+            this.sickCounter++;
+        }
+
+        if(Data.cleanActive == false)
+        {
+            this.cleanCounter++;
+        }
+
     }
 
     public void EventsCheck()
@@ -274,135 +284,160 @@ public class MainActivity extends AppCompatActivity {
 
     public void FoodEventCheck()
     {
-        if(!foodActive)
+        if(!Data.foodActive)
         {
             int time = randomTime.nextInt(100);
             if(foodCounter >= 4 && foodCounter < 6 && time <= 10)
             {
                 Log.d("MANCARE ", " random = " + i);
-                foodActive = true;
+                Data.foodActive = true;
                 foodCounter = 0;
                 foodButton();
             }
             else if(foodCounter >= 6 && foodCounter < 8 && time <= 25)
             {
                 Log.d("MANCARE ", " random = " + i);
-                foodActive = true;
+                Data.foodActive = true;
                 foodCounter = 0;
                 foodButton();
             }
             else if(foodCounter >= 8 && foodCounter < 10 && time <= 50)
             {
                 Log.d("MANCARE ", " random = " + i);
-                foodActive = true;
+                Data.foodActive = true;
                 foodCounter = 0;
                 foodButton();
             }
             else if(foodCounter == 10)
             {
                 Log.d("MANCARE ", " random = " + i);
-                foodActive = true;
+                Data.foodActive = true;
                 foodCounter = 0;
                 foodButton();
             }
+        }
+        else if(Data.foodActive && Data.feeding)
+        {
+            ImageButton bt = findViewById(R.id.imageButton5);
+            bt.setVisibility(View.INVISIBLE);
+            Data.foodActive = false;
+            Data.feeding = false;
+
         }
 
     }
 
     public void WalkEventCheck()
     {
-        if(!stepsActive){
+        if(!Data.stepsActive){
             int time = randomTime.nextInt(100);
             if(walkCounter >= 6 && walkCounter < 8 && time <= 10)
             {
                 Log.d("PLIMBARE ", " random = " + i);
                 walkCounter = 0;
-                stepsActive = true;
+                Data.stepsActive = true;
                 walkButton();
             }
             else if(walkCounter >= 8 && walkCounter < 10 && time <= 25)
             {
                 Log.d("PLIMBARE ", " random = " + i);
                 walkCounter = 0;
-                stepsActive = true;
+                Data.stepsActive = true;
                 walkButton();
             }
             else if(walkCounter >= 10 && walkCounter < 14 && time <= 50)
             {
                 Log.d("PLIMBARE ", " random = " + i);
                 walkCounter = 0;
-                stepsActive = true;
+                Data.stepsActive = true;
                 walkButton();
             }
             else if(walkCounter == 14)
             {
                 Log.d("PLIMBARE ", " random = " + i);
                 walkCounter = 0;
-                stepsActive = true;
+                Data.stepsActive = true;
                 walkButton();
             }
         }
     }
 
     public void SickEventCheck() {
-        if (!sickActive)
+        if (!Data.sickActive)
         {
             int time = randomTime.nextInt(100);
+
+
+
+            if(sickCounter >= 10)
+            {
+                Data.sickActive = true;
+                sickCounter = 0;
+                sickButton();
+            }
 
             if(sickCounter >= 720 && foodCounter < 2160 && time <= 10)
             {
                 Log.d("SICK ", " random = " + i);
-                sickActive = true;
+                Data.sickActive = true;
                 sickCounter = 0;
                 sickButton();
             }
             else if(sickCounter >= 2160 && sickCounter < 4320 && time <= 25)
             {
                 Log.d("SICK ", " random = " + i);
-                sickActive = true;
+                Data.sickActive = true;
                 sickCounter = 0;
                 sickButton();
             }
             else if(sickCounter >= 4320 && time <= 50)
             {
                 Log.d("SICK ", " random = " + i);
-                sickActive = true;
+                Data.sickActive = true;
                 sickCounter = 0;
                 sickButton();
             }
+        }
+        else if(Data.sickActive && Data.caring)
+        {
+            ImageButton bt = findViewById(R.id.imageButton0);
+            bt.setVisibility(View.INVISIBLE);
+            Data.sickActive = false;
+            Data.caring = false;
+
         }
     }
 
     public void SleepEventCheck()
     {
-        if(!sleepActive)
+        if(!Data.sleepActive)
         {
             int time = randomTime.nextInt(100);
             if(sleepCounter < 8 && time < 5)
             {
                 Log.d("SOMN ", " random = " + i);
-                sleepActive = true;
+                Data.sleepActive = true;
                 sleepCounter = 0;
                 sleepButton();
             }
             else if(sleepCounter >= 8 && sleepCounter < 16 && time <= 25)
             {
                 Log.d("SOMN ", " random = " + i);
-                sleepActive = true;
+                Data.sleepActive = true;
                 sleepCounter = 0;
                 sleepButton();
             }
             else if(sleepCounter >= 16 && sleepCounter < 24 && time <= 50)
             {
                 Log.d("SOMN ", " random = " + i);
-                sleepActive = true;
+                Data.sleepActive = true;
                 sleepCounter = 0;
                 sleepButton();
             }
             else if(sleepCounter >= 24)
             {
                 Log.d("SOMN ", " random = " + i);
-                sleepActive = true;
+                Data.sleepActive = true;
                 sleepCounter = 0;
                 sleepButton();
             }
@@ -410,26 +445,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CleanEventCheck() {
-        if (!cleanActive) {
+        if (!Data.cleanActive) {
             int time = randomTime.nextInt(100);
             if (cleanCounter < 24 && time < 10) {
                 Log.d("Clean ", " random = " + i);
-                cleanActive = true;
+                Data.cleanActive = true;
                 cleanCounter = 0;
                 cleanButton();
             } else if (cleanCounter >= 24 && cleanCounter < 48 && time <= 25) {
                 Log.d("Clean ", " random = " + i);
-                cleanActive = true;
+                Data.cleanActive = true;
                 cleanCounter = 0;
                 cleanButton();
             } else if (cleanCounter >= 48 && cleanCounter < 96 && time <= 50) {
                 Log.d("Clean ", " random = " + i);
-                cleanActive = true;
+                Data.cleanActive = true;
                 cleanCounter = 0;
                 cleanButton();
             } else if (cleanCounter >= 96) {
                 Log.d("Clean ", " random = " + i);
-                cleanActive = true;
+                Data.cleanActive = true;
                 cleanCounter = 0;
                 cleanButton();
             }

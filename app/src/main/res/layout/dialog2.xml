@@ -8,7 +8,7 @@
         android:layout_width="320sp"
         android:layout_height="80sp"
         android:padding="10dp"
-        android:text="@string/dialog"
+        android:text="You've just feed your pet. He is no longer hungry."
         android:textAlignment="center"
         android:textSize="20sp"
         android:gravity="center"

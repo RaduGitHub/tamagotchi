@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +68,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
                 editor.commit();
 
+
+                if(Data.foodActive == true && data1[position].equals("Bandage") == false && data1[position].equals("Pills") == false)
+                {
+
+                    final Dialog dialog = new Dialog(context); // Context, this, etc.
+                    dialog.setContentView(R.layout.dialog2);
+                    dialog.show();
+
+                    Data.feeding = true;
+                }
+                else if(Data.sickActive && (data1[position].equals("Bandage") || data1[position].equals("Pills")))
+                {
+                    final Dialog dialog = new Dialog(context); // Context, this, etc.
+                    dialog.setContentView(R.layout.dialog3);;
+                    dialog.show();
+
+                    Data.caring = true;
+                }
+
             }
         });
         holder.buyButton.setOnClickListener(new View.OnClickListener(){
@@ -112,9 +132,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ImageView image;
         Button buyButton;
         Button useButton;
+        View iview;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
+            iview = itemView;
             name_txt = itemView.findViewById(R.id.food_name_txt);
             price = itemView.findViewById(R.id.food_price);
             image = itemView.findViewById(R.id.food_image);
