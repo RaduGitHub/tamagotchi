@@ -1,14 +1,21 @@
 package com.example.tomogatchi2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +35,11 @@ import static com.example.tomogatchi2.Data.MyPREFERENCES;
 import static com.example.tomogatchi2.Data.Name;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
+    private static final int NOTIFICATION_ID = 0;
+    private static final String ACTION_UPDATE_NOTIFICATION =
+            "com.example.android.notifyme.ACTION_UPDATE_NOTIFICATION";
+    private NotificationReceiver mReceiver;
     //public static final String MyPREFERENCES = "MyPrefs" ;
     //public static final String Name = "nameKey";
     TextView Money;
@@ -41,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
     Random randomTime = new Random();
     Random randomEvent = new Random();
 
-    int foodCounter, sleepCounter, walkCounter, sickCounter, cleanCounter;
+
+    boolean cleaning = false;
+    int cleaningCounterStart;
+    int current = 0;
+    private NotificationManager mNotifyManager;
 
     int i = 0;
     @Override
@@ -64,7 +80,27 @@ public class MainActivity extends AppCompatActivity {
 
 
         eventHandler.postDelayed(eventController, 0);
+        //createNotificationChannel();
+        //mReceiver = new NotificationReceiver();
+        //registerReceiver(mReceiver,new IntentFilter(ACTION_UPDATE_NOTIFICATION));
+        BackgroundService service = new BackgroundService();
+        Intent serviceIntent = new Intent(this, BackgroundService.class);
+        if(!isMyServiceRunning(service.getClass()))
+        {
+            startService(serviceIntent);
+        }
+    }
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i ("Service status", "Running");
+                return true;
+            }
+        }
+        Log.i ("Service status", "Not running");
+        return false;
     }
 
     //Shows the money updates when coming back to the screen
@@ -77,26 +113,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void IncreaseCoin(View view){
 
-        Money.setText(String.valueOf(Integer.parseInt(Money.getText().toString()) + 1));
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Data.Money, Integer.parseInt(Money.getText().toString()));
-        editor.commit();
 
-/*        long startTime = System.currentTimeMillis();
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
-
-        // Create a calendar object that will convert the date and time value in milliseconds to date.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(startTime);
-
-        System.out.println(formatter.format(calendar.getTime()));*/
-
-        i++;
-        if(i%5 == 0)
+        if(cleaning == true)
         {
-            walkButton();
+            current++;
+
+            if(current == 10)
+            {
+                ImageButton bt = findViewById(R.id.imageButton4);
+                bt.setVisibility(View.INVISIBLE);
+
+                final Dialog dialog = new Dialog(this); // Context, this, etc.
+                dialog.setContentView(R.layout.dialog4);
+                dialog.show();
+                cleaning = false;
+                current = 0;
+            }
         }
+        else
+        {
+            Money.setText(String.valueOf(Integer.parseInt(Money.getText().toString()) + 1));
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(Data.Money, Integer.parseInt(Money.getText().toString()));
+            editor.commit();
+        }
+
     }
 
     public void ChangeToShop(View view){
@@ -174,19 +215,32 @@ public class MainActivity extends AppCompatActivity {
                 // to do //
             }
         });
+
+
     }
 
     public void cleanButton()
     {
+
         ImageButton bt = findViewById(R.id.imageButton4);
         bt.setVisibility(View.VISIBLE);
         bt.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                // to do //
+                cleanDialog();
+
+                cleaning = true;
             }
         });
+
+    }
+
+    public void cleanDialog()
+    {
+        final Dialog dialog = new Dialog(this); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog5);
+        dialog.show();
     }
 
     public void foodButton()
@@ -200,77 +254,22 @@ public class MainActivity extends AppCompatActivity {
                 // to do //
             }
         });
+
     }
 
-
-    public void stepsDialog(String current, String total) {
-        final Dialog dialog = new Dialog(this); // Context, this, etc.
-        dialog.setContentView(R.layout.dialog);
-        dialog.setTitle(current + "/" + total);
-        dialog.show();
-    }
-
-    public void hungryEventStart() {
-        final Dialog dialog = new Dialog(this); // Context, this, etc.
-        dialog.setContentView(R.layout.dialog);
-        dialog.setTitle("Your pet is hungry, give it some food");
-        dialog.show();
-    }
-
-    public void happinessController()
-    {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        int happiness = sharedPreferences.getInt(Data.Happiness, 0);
-        Log.d("HAPPENED", "happy " + happiness);
-        if(happiness > 1)
-        {
-            happiness  = happiness - 1;
-            editor.putInt(Data.Happiness, happiness);
-        }
-        editor.commit();
-    }
 
     private Runnable eventController = new Runnable()
     {
         public void run()
         {
-            incrementEventTimers();
             EventsCheck();
-            happinessController();
+            //happinessController();
             i++;
 
-            eventHandler.postDelayed(this, 1000);
+            eventHandler.postDelayed(this, Data.tick);
         }
     };
 
-    public void incrementEventTimers()
-    {
-        if(Data.sleepActive == false)
-        {
-            this.sleepCounter++;
-        }
-
-        if(Data.foodActive == false)
-        {
-            this.foodCounter++;
-        }
-
-        if(Data.stepsActive == false)
-        {
-            this.walkCounter++;
-        }
-
-        if(Data.sickActive == false)
-        {
-            this.sickCounter++;
-        }
-
-        if(Data.cleanActive == false)
-        {
-            this.cleanCounter++;
-        }
-
-    }
 
     public void EventsCheck()
     {
@@ -284,39 +283,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void FoodEventCheck()
     {
-        if(!Data.foodActive)
-        {
-            int time = randomTime.nextInt(100);
-            if(foodCounter >= 4 && foodCounter < 6 && time <= 10)
-            {
-                Log.d("MANCARE ", " random = " + i);
-                Data.foodActive = true;
-                foodCounter = 0;
-                foodButton();
-            }
-            else if(foodCounter >= 6 && foodCounter < 8 && time <= 25)
-            {
-                Log.d("MANCARE ", " random = " + i);
-                Data.foodActive = true;
-                foodCounter = 0;
-                foodButton();
-            }
-            else if(foodCounter >= 8 && foodCounter < 10 && time <= 50)
-            {
-                Log.d("MANCARE ", " random = " + i);
-                Data.foodActive = true;
-                foodCounter = 0;
-                foodButton();
-            }
-            else if(foodCounter == 10)
-            {
-                Log.d("MANCARE ", " random = " + i);
-                Data.foodActive = true;
-                foodCounter = 0;
-                foodButton();
-            }
-        }
-        else if(Data.foodActive && Data.feeding)
+
+        if(Data.foodActive && Data.feeding)
         {
             ImageButton bt = findViewById(R.id.imageButton5);
             bt.setVisibility(View.INVISIBLE);
@@ -324,81 +292,28 @@ public class MainActivity extends AppCompatActivity {
             Data.feeding = false;
 
         }
+        else if(Data.foodActive)
+        {
+            foodButton();
+        }
 
     }
 
     public void WalkEventCheck()
     {
-        if(!Data.stepsActive){
-            int time = randomTime.nextInt(100);
-            if(walkCounter >= 6 && walkCounter < 8 && time <= 10)
-            {
-                Log.d("PLIMBARE ", " random = " + i);
-                walkCounter = 0;
-                Data.stepsActive = true;
-                walkButton();
-            }
-            else if(walkCounter >= 8 && walkCounter < 10 && time <= 25)
-            {
-                Log.d("PLIMBARE ", " random = " + i);
-                walkCounter = 0;
-                Data.stepsActive = true;
-                walkButton();
-            }
-            else if(walkCounter >= 10 && walkCounter < 14 && time <= 50)
-            {
-                Log.d("PLIMBARE ", " random = " + i);
-                walkCounter = 0;
-                Data.stepsActive = true;
-                walkButton();
-            }
-            else if(walkCounter == 14)
-            {
-                Log.d("PLIMBARE ", " random = " + i);
-                walkCounter = 0;
-                Data.stepsActive = true;
-                walkButton();
-            }
+        if(Data.stepsActive)
+        {
+            walkButton();
         }
+
     }
 
     public void SickEventCheck() {
-        if (!Data.sickActive)
+        if (Data.sickActive)
         {
-            int time = randomTime.nextInt(100);
-
-
-
-            if(sickCounter >= 10)
-            {
-                Data.sickActive = true;
-                sickCounter = 0;
-                sickButton();
-            }
-
-            if(sickCounter >= 720 && foodCounter < 2160 && time <= 10)
-            {
-                Log.d("SICK ", " random = " + i);
-                Data.sickActive = true;
-                sickCounter = 0;
-                sickButton();
-            }
-            else if(sickCounter >= 2160 && sickCounter < 4320 && time <= 25)
-            {
-                Log.d("SICK ", " random = " + i);
-                Data.sickActive = true;
-                sickCounter = 0;
-                sickButton();
-            }
-            else if(sickCounter >= 4320 && time <= 50)
-            {
-                Log.d("SICK ", " random = " + i);
-                Data.sickActive = true;
-                sickCounter = 0;
-                sickButton();
-            }
+            sickButton();
         }
-        else if(Data.sickActive && Data.caring)
+        if(Data.sickActive && Data.caring)
         {
             ImageButton bt = findViewById(R.id.imageButton0);
             bt.setVisibility(View.INVISIBLE);
@@ -410,64 +325,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void SleepEventCheck()
     {
-        if(!Data.sleepActive)
+        if(Data.sleepActive)
         {
-            int time = randomTime.nextInt(100);
-            if(sleepCounter < 8 && time < 5)
-            {
-                Log.d("SOMN ", " random = " + i);
-                Data.sleepActive = true;
-                sleepCounter = 0;
-                sleepButton();
-            }
-            else if(sleepCounter >= 8 && sleepCounter < 16 && time <= 25)
-            {
-                Log.d("SOMN ", " random = " + i);
-                Data.sleepActive = true;
-                sleepCounter = 0;
-                sleepButton();
-            }
-            else if(sleepCounter >= 16 && sleepCounter < 24 && time <= 50)
-            {
-                Log.d("SOMN ", " random = " + i);
-                Data.sleepActive = true;
-                sleepCounter = 0;
-                sleepButton();
-            }
-            else if(sleepCounter >= 24)
-            {
-                Log.d("SOMN ", " random = " + i);
-                Data.sleepActive = true;
-                sleepCounter = 0;
-                sleepButton();
-            }
+            sleepButton();
         }
     }
 
     public void CleanEventCheck() {
-        if (!Data.cleanActive) {
-            int time = randomTime.nextInt(100);
-            if (cleanCounter < 24 && time < 10) {
-                Log.d("Clean ", " random = " + i);
-                Data.cleanActive = true;
-                cleanCounter = 0;
-                cleanButton();
-            } else if (cleanCounter >= 24 && cleanCounter < 48 && time <= 25) {
-                Log.d("Clean ", " random = " + i);
-                Data.cleanActive = true;
-                cleanCounter = 0;
-                cleanButton();
-            } else if (cleanCounter >= 48 && cleanCounter < 96 && time <= 50) {
-                Log.d("Clean ", " random = " + i);
-                Data.cleanActive = true;
-                cleanCounter = 0;
-                cleanButton();
-            } else if (cleanCounter >= 96) {
-                Log.d("Clean ", " random = " + i);
-                Data.cleanActive = true;
-                cleanCounter = 0;
-                cleanButton();
-            }
+        if (Data.cleanActive)
+        {
+            cleanButton();
         }
     }
+
+
 }

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tomogatchi2">
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:name=".MyContext"
         android:allowBackup="true"
@@ -17,6 +17,8 @@
         <activity android:name=".Characteristics" />
         <activity android:name=".MainActivity" />
         <activity android:name=".NamePet" />
+        <service android:name=".BackgroundService"
+            android:enabled="true"/>
         <activity
             android:name=".Drugstore"
             android:label="@string/title_activity_main2"
@@ -32,6 +34,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="restartservice" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

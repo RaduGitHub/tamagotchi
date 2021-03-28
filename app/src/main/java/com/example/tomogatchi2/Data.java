@@ -4,6 +4,9 @@ import android.content.SharedPreferences;
 
 public class Data {
 
+    public static int foodCounter, sleepCounter, walkCounter, sickCounter, cleanCounter;
+    public static int tick = 2000;
+
     public static boolean stepsActive = false;
     public static boolean foodActive = false;
     public static boolean sleepActive = false;
