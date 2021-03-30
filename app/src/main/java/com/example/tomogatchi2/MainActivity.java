@@ -5,22 +5,31 @@ import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
+import androidx.work.Configuration;
+import androidx.work.WorkManager;
 
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -30,6 +39,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 import static com.example.tomogatchi2.Data.MyPREFERENCES;
 import static com.example.tomogatchi2.Data.Name;
@@ -47,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
     Context context;
 
     StepCounter fragment;
+    SleepFragment sleepFragment;
 
     Handler eventHandler = new Handler();
 
     Random randomTime = new Random();
     Random randomEvent = new Random();
-
 
     boolean cleaning = false;
     int cleaningCounterStart;
@@ -68,16 +78,16 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(Data.DaysAlive, (int)(System.currentTimeMillis() - sharedPreferences.getLong(Data.DayBorn, 0)) / 86400000);
-
+        editor.commit();
         fragment = new StepCounter();
-
+        sleepFragment = new SleepFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
         addFragment(fragment);
-
+        addFragment(sleepFragment);
 
         eventHandler.postDelayed(eventController, 0);
         //createNotificationChannel();
@@ -199,7 +209,11 @@ public class MainActivity extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                // to do //
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.show(sleepFragment);
+                fragmentTransaction.commit();
             }
         });
     }
@@ -254,14 +268,41 @@ public class MainActivity extends AppCompatActivity {
                 // to do //
             }
         });
-
     }
 
+
+    public void stepsDialog(String current, String total) {
+        final Dialog dialog = new Dialog(this); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog);
+        dialog.setTitle(current + "/" + total);
+        dialog.show();
+    }
+
+    public void hungryEventStart() {
+        final Dialog dialog = new Dialog(this); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog);
+        dialog.setTitle("Your pet is hungry, give it some food");
+        dialog.show();
+    }
+
+    public void happinessController()
+    {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int happiness = sharedPreferences.getInt(Data.Happiness, 0);
+        Log.d("HAPPENED", "happy " + happiness);
+        if(happiness > 1)
+        {
+            happiness  = happiness - 1;
+            editor.putInt(Data.Happiness, happiness);
+        }
+        editor.commit();
+    }
 
     private Runnable eventController = new Runnable()
     {
         public void run()
         {
+            incrementEventTimers();
             EventsCheck();
             //happinessController();
             i++;
@@ -270,6 +311,34 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void incrementEventTimers()
+    {
+        if(Data.sleepActive == false)
+        {
+            Data.sleepCounter++;
+        }
+
+        if(Data.foodActive == false)
+        {
+            Data.foodCounter++;
+        }
+
+        if(Data.stepsActive == false)
+        {
+            Data.walkCounter++;
+        }
+
+        if(Data.sickActive == false)
+        {
+            Data.sickCounter++;
+        }
+
+        if(Data.cleanActive == false)
+        {
+            Data.cleanCounter++;
+        }
+
+    }
 
     public void EventsCheck()
     {
@@ -305,7 +374,6 @@ public class MainActivity extends AppCompatActivity {
         {
             walkButton();
         }
-
     }
 
     public void SickEventCheck() {
@@ -337,6 +405,4 @@ public class MainActivity extends AppCompatActivity {
             cleanButton();
         }
     }
-
-
 }
