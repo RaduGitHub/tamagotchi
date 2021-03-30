@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,13 +23,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.tomogatchi2.Controllers.CatchChoController;
+import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.MainActivity;
+import com.example.tomogatchi2.R;
+
 import org.w3c.dom.Text;
 
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game1 extends AppCompatActivity {
+public class CatchChoView extends AppCompatActivity {
 
     TextView timerTextView;
     TextView score;
@@ -38,6 +43,7 @@ public class Game1 extends AppCompatActivity {
     int points;
     Activity thisActivity;
     SharedPreferences sharedPreferences;
+    CatchChoController catchChoController;
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -51,10 +57,11 @@ public class Game1 extends AppCompatActivity {
             int minutes = seconds / 60;
             seconds = seconds % 60;
 
-
+            //Set Timer
             timerTextView.setText(String.format("%d:%02d", minutes, seconds));
 
-            timerHandler.postDelayed(this, 500);
+            //Delay for 500ms
+            timerHandler.postDelayed(this, 1000);
 
             if(seconds == 30)
             {
@@ -74,17 +81,7 @@ public class Game1 extends AppCompatActivity {
                         })
                         .show();
 
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                int happiness = sharedPreferences.getInt(Data.Happiness, 0);
-                if(happiness < 100)
-                {
-                    happiness  = happiness + 10;
-                    editor.putInt(Data.Happiness, happiness);
-                }
-                int coins = sharedPreferences.getInt(Data.Money, 0);
-                coins = coins + ((int) Math.floor(happiness / 20)) * points;
-                editor.putInt(Data.Money, coins);
-                editor.commit();
+                catchChoController.AddGameHappines(sharedPreferences,points);
             }
         }
     };
@@ -92,10 +89,13 @@ public class Game1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         thisActivity = this;
         setContentView(R.layout.activity_game1);
         score = (TextView) findViewById(R.id.textView2);
+        catchChoController = new CatchChoController();
+
         //get display size.
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -137,9 +137,6 @@ public class Game1 extends AppCompatActivity {
                 button.animate().x(randomX).y(randomY);
             }
         });
-
-
-
 
     }
 

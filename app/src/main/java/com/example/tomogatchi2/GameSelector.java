@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.tomogatchi2.Views.CatchChoView;
+
 public class GameSelector extends AppCompatActivity {
 
     @Override
@@ -16,7 +18,7 @@ public class GameSelector extends AppCompatActivity {
 
     public void ChangeToGame1(View view)
     {
-        Intent intent = new Intent(this, Game1.class);
+        Intent intent = new Intent(this, CatchChoView.class);
         startActivity(intent);
     }
 
