@@ -4,16 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
+import androidx.work.Configuration;
+import androidx.work.WorkManager;
 
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -23,6 +32,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 import static com.example.tomogatchi2.Data.MyPREFERENCES;
 import static com.example.tomogatchi2.Data.Name;
@@ -35,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
 
     StepCounter fragment;
+    SleepFragment sleepFragment;
 
     Handler eventHandler = new Handler();
 
@@ -42,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
     Random randomEvent = new Random();
 
     int foodCounter, sleepCounter, walkCounter, sickCounter, cleanCounter;
+
+    //////////////////////////////////////////////////////////////////////////////Trying sensor
+    //Variable to store brightness value
+    private int brightness;
+    //Content resolver used as a handle to the system's settings
+    private ContentResolver cResolver;
+    //Window object, that will store a reference to the current window
+    private Window window;
+    //////////////////////////////////////////////////////////////////////////////SensorLight
 
     int i = 0;
     @Override
@@ -52,19 +72,17 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(Data.DaysAlive, (int)(System.currentTimeMillis() - sharedPreferences.getLong(Data.DayBorn, 0)) / 86400000);
-
+        editor.commit();
         fragment = new StepCounter();
-
+        sleepFragment = new SleepFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
         addFragment(fragment);
-
+        addFragment(sleepFragment);
 
         eventHandler.postDelayed(eventController, 0);
-
     }
 
     //Shows the money updates when coming back to the screen
@@ -123,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void addFragment(Fragment fragment)
     {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -158,7 +175,11 @@ public class MainActivity extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                // to do //
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.show(sleepFragment);
+                fragmentTransaction.commit();
             }
         });
     }
