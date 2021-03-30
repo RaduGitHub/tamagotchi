@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     Random randomTime = new Random();
     Random randomEvent = new Random();
 
-
     boolean cleaning = false;
     int cleaningCounterStart;
     int current = 0;
@@ -316,27 +315,27 @@ public class MainActivity extends AppCompatActivity {
     {
         if(Data.sleepActive == false)
         {
-            this.sleepCounter++;
+            Data.sleepCounter++;
         }
 
         if(Data.foodActive == false)
         {
-            this.foodCounter++;
+            Data.foodCounter++;
         }
 
         if(Data.stepsActive == false)
         {
-            this.walkCounter++;
+            Data.walkCounter++;
         }
 
         if(Data.sickActive == false)
         {
-            this.sickCounter++;
+            Data.sickCounter++;
         }
 
         if(Data.cleanActive == false)
         {
-            this.cleanCounter++;
+            Data.cleanCounter++;
         }
 
     }
