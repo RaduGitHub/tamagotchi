@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,23 +10,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tomogatchi2.Models.Data;
+import com.example.tomogatchi2.Controllers.ChoSaysController;
+import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.R;
 
 import java.util.Random;
 
-import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
+import static com.example.tomogatchi2.Data.MyPREFERENCES;
 
-public class Game2 extends AppCompatActivity {
+public class ChoSaysGame extends AppCompatActivity {
 
     public String colors[] = {"Yellow", "Red", "Green", "Blue"};
 
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    //SharedPreferences.Editor editor;
 
     TextView score, timer, color;
     Button startButton;
     Button redButton, yelButton, bluButton, greButton;
     Random rand;
+
+    ChoSaysController choSaysController;
 
 
     @Override
@@ -48,8 +52,10 @@ public class Game2 extends AppCompatActivity {
         bluButton.setEnabled(false);
         yelButton.setEnabled(false);
 
+        choSaysController = new ChoSaysController();
+
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        //editor = sharedPreferences.edit();
 
         rand = new Random();
     }
@@ -107,14 +113,15 @@ public class Game2 extends AppCompatActivity {
                 bluButton.setEnabled(false);
                 yelButton.setEnabled(false);
                 timer.setText(String.valueOf(0));
-                if(Integer.parseInt(score.getText().toString()) > 30 ){
+                /*if(Integer.parseInt(score.getText().toString()) > 30 ){
                     editor.putInt(Data.Happiness, sharedPreferences.getInt(Data.Happiness, 0) + 10);
                 }else{
                     editor.putInt(Data.Happiness, sharedPreferences.getInt(Data.Happiness, 0) + 5);
-                }
+                }*/
+                choSaysController.AddGameHappines(sharedPreferences, Integer.parseInt(score.
+                                getText().toString()));
             }
         }.start();
     }
-
 
 }
