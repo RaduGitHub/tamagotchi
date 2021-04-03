@@ -1,50 +1,32 @@
-package com.example.tomogatchi2;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.tomogatchi2.Controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.MyContext;
 
 import java.util.Random;
 
-public class NamePet extends AppCompatActivity {
-
-    Button b1;
+public class NamePetController {
 
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    Context context;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_name_pet);
-        b1=(Button)findViewById(R.id.submitButton);
-
-        sharedPreferences = getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
-
-        EditText t = (EditText)findViewById(R.id.namingText);
-
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.putString(Data.Name, t.getText().toString());
-                populateSharedPreferences(editor);
-                editor.commit();
-                Intent intent;
-                intent = new Intent(NamePet.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+    public NamePetController()
+    {
+        this.context = MyContext.getAppContext();
+        sharedPreferences = this.context.getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        populateSharedPreferences(editor);
     }
 
+    public void namePet(String name)
+    {
+        editor.putString(Data.Name, name);
+        editor.commit();
+    }
 
     protected void populateSharedPreferences(SharedPreferences.Editor editor)
     {
@@ -101,4 +83,5 @@ public class NamePet extends AppCompatActivity {
         editor.commit();
 
     }
+
 }

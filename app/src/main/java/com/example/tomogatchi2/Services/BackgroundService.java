@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Services;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -15,11 +15,14 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+
+import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.MainActivity;
+import com.example.tomogatchi2.NotificationReceiver;
+import com.example.tomogatchi2.R;
 
 import java.util.Random;
 

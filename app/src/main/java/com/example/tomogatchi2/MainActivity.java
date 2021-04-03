@@ -1,48 +1,28 @@
 package com.example.tomogatchi2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
-import androidx.work.Configuration;
-import androidx.work.WorkManager;
 
 import android.app.ActivityManager;
 import android.app.Dialog;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.tomogatchi2.Services.BackgroundService;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Random;
-import java.util.concurrent.Executors;
 
 import static com.example.tomogatchi2.Data.MyPREFERENCES;
-import static com.example.tomogatchi2.Data.Name;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";

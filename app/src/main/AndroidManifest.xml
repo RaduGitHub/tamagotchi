@@ -4,6 +4,7 @@
     package="com.example.tomogatchi2">
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-feature android:name="android.hardware.sensor.light" />
 
 
     <application
@@ -19,8 +20,8 @@
         <activity android:name=".Views.CatchChoView" />
         <activity android:name=".Characteristics" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".NamePet" />
-        <service android:name=".BackgroundService"
+        <activity android:name=".Views.NamePet" />
+        <service android:name=".Services.BackgroundService"
             android:enabled="true"/>
         <activity
             android:name=".Drugstore"

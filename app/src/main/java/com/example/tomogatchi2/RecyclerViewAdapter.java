@@ -19,20 +19,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tomogatchi2.Models.ShopItem;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>{
 
-    String data1[], data2[], data3[];
-    int images[];
+    ShopItem shopItems[];
     Activity thisActivity;
     Context context;
     SharedPreferences sharedPreferences;
 
-    public RecyclerViewAdapter(Context ct, String s1[], String s2[], String s3[], int images[], Activity thisActivity){
+    public RecyclerViewAdapter(Context ct, ShopItem[] shopItem, Activity thisActivity){
         this.context = ct;
-        this.data1 = s1;
-        this.data2 = s2;
-        this.data3 = s3;
-        this.images = images;
+        this.shopItems = shopItem;
         sharedPreferences = context.getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
         thisActivity = thisActivity;
 
@@ -50,10 +48,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position)
     {
-        holder.name_txt.setText(data1[position]);
-        holder.price.setText(data2[position]);
-        holder.owned_txt.setText(data3[position]);
-        holder.image.setImageResource(images[position]);
+        holder.name_txt.setText(shopItems[position].name);
+        holder.price.setText(shopItems[position].price);
+        holder.owned_txt.setText(shopItems[position].owned);
+        holder.image.setImageResource(shopItems[position].image);
         holder.useButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -73,11 +71,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }else{
                     holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
                             getText().toString()) - 1));
-                    editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.
+                    editor.putInt(shopItems[position].name + "Key", Integer.parseInt(holder.owned_txt.
                             getText().toString()));
 
                     int happiness = sharedPreferences.getInt(Data.Happiness, 0);
-                    int happinessToAdd = sharedPreferences.getInt(data1[position] + "HappyKey", 0);
+                    int happinessToAdd = sharedPreferences.getInt(shopItems[position].name + "HappyKey", 0);
                     Log.d("xxx", "onClick: " + happinessToAdd);
                     if(happiness < 100)
                     {
@@ -87,7 +85,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     editor.commit();
 
 
-                    if(Data.foodActive == true && data1[position].equals("Bandage") == false && data1[position].equals("Pills") == false)
+                    if(Data.foodActive == true && shopItems[position].name.equals("Bandage") == false &&
+                            shopItems[position].name.equals("Pills") == false)
                     {
 
                         final Dialog dialog = new Dialog(context); // Context, this, etc.
@@ -96,7 +95,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                         Data.feeding = true;
                     }
-                    else if(Data.sickActive && (data1[position].equals("Bandage") || data1[position].equals("Pills")))
+                    else if(Data.sickActive && (shopItems[position].name.equals("Bandage") ||
+                            shopItems[position].name.equals("Pills")))
                     {
                         final Dialog dialog = new Dialog(context); // Context, this, etc.
                         dialog.setContentView(R.layout.dialog3);;
@@ -122,7 +122,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     holder.owned_txt.setText(String.valueOf(Integer.parseInt(holder.owned_txt.
                             getText().toString()) + 1));
 
-                    editor.putInt(data1[position] + "Key", Integer.parseInt(holder.owned_txt.
+                    editor.putInt(shopItems[position].name + "Key", Integer.parseInt(holder.owned_txt.
                             getText().toString()));
 
                     editor.putInt(Data.Money, currentMoney - Integer.parseInt(holder.price.
@@ -135,12 +135,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             }
         });
-        Log.d("status", "onBindViewHolder: " + data1[position]);
     }
 
     @Override
     public int getItemCount() {
-        return data1.length;
+        return shopItems.length;
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder
