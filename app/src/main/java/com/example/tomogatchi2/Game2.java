@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.tomogatchi2.Models.Data;
+
 import java.util.Random;
 
-import static com.example.tomogatchi2.Data.MyPREFERENCES;
+import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
 
 public class Game2 extends AppCompatActivity {
 

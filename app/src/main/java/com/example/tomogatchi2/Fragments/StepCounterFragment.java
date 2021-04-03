@@ -1,47 +1,42 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Fragments;
 
-import android.app.Service;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.view.WindowManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SleepFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SleepFragment extends Fragment implements SensorEventListener {
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
+import com.example.tomogatchi2.R;
+
+import org.w3c.dom.Text;
+
+import static androidx.core.content.ContextCompat.getSystemService;
+
+public class StepCounterFragment extends Fragment implements SensorEventListener {
+
+    public static final String EXTRA_MESSAGE = "com.example.android.twoactivities.extra.MESSAGE";
+    private TextView stepCounter;
+    private TextView stepDetector;
     private SensorManager sensorManager;
     private Sensor sensor;
+    private boolean counterSensor;
+    int stepCount = 0;
 
-    private TextView sleepCondition;
-
-    public SleepFragment() {
-
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     */
-    public static SleepFragment newInstance() {
-        SleepFragment fragment = new SleepFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View rootView = inflater.inflate(R.layout.step_counter_fragment, container, false);
+        return rootView;
     }
 
     @Override
@@ -49,21 +44,17 @@ public class SleepFragment extends Fragment implements SensorEventListener {
         super.onActivityCreated(savedInstanceState);
 
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        sleepCondition = (TextView) getActivity().findViewById(R.id.sleepTextView);
+        stepCounter = getActivity().findViewById(R.id.textView5);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
 
         if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            counterSensor = true;
         }
         else{
-            sleepCondition.setText("Light sensor is not working properly");
+            stepCounter.setText("Counter sensor is not working properly");
+            counterSensor = false;
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sleep, container, false);
     }
 
     @Override
@@ -71,7 +62,7 @@ public class SleepFragment extends Fragment implements SensorEventListener {
         super.onStart();
         if (sensor != null) {
             sensorManager.registerListener(this, sensor,
-                    Sensor.TYPE_LIGHT);
+                    Sensor.TYPE_STEP_COUNTER);
         }
     }
 
@@ -84,11 +75,9 @@ public class SleepFragment extends Fragment implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor == sensor){
-            if( (int) event.values[0] < 2000){
-                sleepCondition.setText("d" + event.values[0]);
-            }else{
-                sleepCondition.setText("u" + event.values[0]);
-            }
+            stepCount = (int) event.values[0];
+            stepCounter.setText(String.valueOf(stepCount));
+            return;
         }
     }
 
@@ -100,7 +89,7 @@ public class SleepFragment extends Fragment implements SensorEventListener {
     @Override
     public void onResume(){
         super.onResume();
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null){
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
         }
     }
@@ -108,10 +97,10 @@ public class SleepFragment extends Fragment implements SensorEventListener {
     @Override
     public void onPause(){
         super.onPause();
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null){
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
             sensorManager.unregisterListener(this, sensor);
         }
     }
-
-
 }
+
+

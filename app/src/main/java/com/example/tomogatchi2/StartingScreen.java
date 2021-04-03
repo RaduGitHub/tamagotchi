@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.tomogatchi2.Views.NamePet;
+import com.example.tomogatchi2.Views.NamePetView;
 
 public class StartingScreen extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class StartingScreen extends AppCompatActivity {
         String isNamed = sharedPreferences.getString(Name, "nameKey");
 
         if(isNamed.compareTo("nameKey") == 0){
-            intent = new Intent(StartingScreen.this, NamePet.class);
+            intent = new Intent(StartingScreen.this, NamePetView.class);
         }
         else
         {

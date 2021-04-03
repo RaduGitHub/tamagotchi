@@ -7,7 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import static com.example.tomogatchi2.Data.MyPREFERENCES;
+import com.example.tomogatchi2.Models.Data;
+
+import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
 
 public class Characteristics extends AppCompatActivity {
     SharedPreferences sharedPreferences;

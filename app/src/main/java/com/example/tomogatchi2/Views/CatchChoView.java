@@ -2,10 +2,8 @@ package com.example.tomogatchi2.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,26 +11,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tomogatchi2.Controllers.CatchChoController;
-import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.MainActivity;
 import com.example.tomogatchi2.R;
 
-import org.w3c.dom.Text;
-
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class CatchChoView extends AppCompatActivity {
 

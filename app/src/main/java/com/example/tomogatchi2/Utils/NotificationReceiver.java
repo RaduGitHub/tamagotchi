@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

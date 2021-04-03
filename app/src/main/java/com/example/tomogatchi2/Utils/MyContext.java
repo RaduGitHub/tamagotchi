@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Utils;
 
 import android.app.Application;
 import android.content.Context;
