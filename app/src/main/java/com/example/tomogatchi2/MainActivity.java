@@ -25,6 +25,7 @@ import com.example.tomogatchi2.Services.BackgroundService;
 import com.example.tomogatchi2.Utils.NotificationReceiver;
 import com.example.tomogatchi2.Views.DrugstoreView;
 import com.example.tomogatchi2.Views.GameSelectorView;
+import com.example.tomogatchi2.Views.Shop;
 
 import java.util.Random;
 
