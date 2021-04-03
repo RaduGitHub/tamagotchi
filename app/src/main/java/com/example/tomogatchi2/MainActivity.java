@@ -24,7 +24,7 @@ import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.Services.BackgroundService;
 import com.example.tomogatchi2.Utils.NotificationReceiver;
 import com.example.tomogatchi2.Views.DrugstoreView;
-import com.example.tomogatchi2.Views.GameSelector;
+import com.example.tomogatchi2.Views.GameSelectorView;
 import com.example.tomogatchi2.Views.Shop;
 
 import java.util.Random;
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ChangeToGameSelector(View view)
     {
-        Intent intent = new Intent(this, GameSelector.class);
+        Intent intent = new Intent(this, GameSelectorView.class);
         startActivity(intent);
     }
 

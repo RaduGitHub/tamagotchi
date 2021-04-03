@@ -18,7 +18,7 @@ import java.util.Random;
 
 import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
 
-public class ChoSaysGame extends AppCompatActivity {
+public class ChoSaysGameView extends AppCompatActivity {
 
     public String colors[] = {"Yellow", "Red", "Green", "Blue"};
 
