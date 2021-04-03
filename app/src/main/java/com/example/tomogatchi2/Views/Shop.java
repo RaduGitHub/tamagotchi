@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.Models.ShopItem;
 import com.example.tomogatchi2.R;
-import com.example.tomogatchi2.RecyclerViewAdapter;
+import com.example.tomogatchi2.Utils.RecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
