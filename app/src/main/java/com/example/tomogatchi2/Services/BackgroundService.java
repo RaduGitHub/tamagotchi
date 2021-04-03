@@ -107,6 +107,7 @@ public class BackgroundService extends Service {
             SickEventCheck();
             SleepEventCheck();
             CleanEventCheck();
+            happinessController();
 
             eventHandler.postDelayed(this, Data.tick);
         }

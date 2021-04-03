@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.tomogatchi2.Game2;
+import com.example.tomogatchi2.Views.ChoSaysGame;
 import com.example.tomogatchi2.R;
 import com.example.tomogatchi2.Views.CatchChoView;
 import com.example.tomogatchi2.Views.ChoSaysGame;
