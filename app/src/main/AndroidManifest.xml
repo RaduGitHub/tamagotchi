@@ -15,8 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tomogatchi2">
-        <activity android:name=".Views.ChoSaysGame"></activity>
-        <activity android:name=".Views.GameSelector" />
+        <activity android:name=".Views.ChoSaysGameView"></activity>
+        <activity android:name=".Views.GameSelectorView" />
         <activity android:name=".Views.CatchChoView" />
         <activity android:name=".Characteristics" />
         <activity android:name=".MainActivity" />
@@ -31,7 +31,7 @@
             android:name=".Shop"
             android:label="@string/title_activity_shop"
             android:theme="@style/Theme.Tomogatchi2.NoActionBar" />
-        <activity android:name=".StartingScreen">
+        <activity android:name=".Views.StartingScreenView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
