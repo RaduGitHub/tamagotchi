@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.tomogatchi2.Models.ShopItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,6 +36,7 @@ public class Shop extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
 
         recyclerView = findViewById(R.id.recyclerView);
+        ShopItem[] shopItem = new ShopItem[7];
 
         foodType = getResources().getStringArray(R.array.foodTypes);
 
@@ -54,8 +56,9 @@ public class Shop extends AppCompatActivity {
         foodOwned[4] = String.valueOf(sharedPreferences.getInt(Data.Soda, 0));
         foodOwned[5] = String.valueOf(sharedPreferences.getInt(Data.HotDog, 0));
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, foodType, foodPrice,
-                foodOwned, images, thisActivity);
+
+
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, shopItem, thisActivity);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

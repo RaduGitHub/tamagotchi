@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.tomogatchi2.Models.ShopItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -18,8 +19,7 @@ import android.view.View;
 public class Drugstore extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    String drugType[], drugPrice[], drugOwned[];
-    int images[] = {R.drawable.bandage, R.drawable.pills};
+    String drugType[];
     SharedPreferences sharedPreferences;
     Activity thisActivity;
 
@@ -34,19 +34,24 @@ public class Drugstore extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView2);
 
+        ShopItem[] shopItems = new ShopItem[2];
+        shopItems[0] = new ShopItem();
+        shopItems[1] = new ShopItem();
 
         drugType = getResources().getStringArray(R.array.drugs);
+        shopItems[0].name = drugType[0];
+        shopItems[1].name = drugType[1];
 
-        drugPrice = new String[2];
-        drugPrice[0] = String.valueOf(sharedPreferences.getInt(Data.BandagePrice, 0));
-        drugPrice[1] = String.valueOf(sharedPreferences.getInt(Data.PillsPrice, 0));
+        shopItems[0].price = String.valueOf(sharedPreferences.getInt(Data.BandagePrice, 0));
+        shopItems[1].price = String.valueOf(sharedPreferences.getInt(Data.PillsPrice, 0));
 
-        drugOwned = new String[2];
-        drugOwned[0] = String.valueOf(sharedPreferences.getInt(Data.Bandage, 0));
-        drugOwned[1] = String.valueOf(sharedPreferences.getInt(Data.Pills, 0));
+        shopItems[0].owned = String.valueOf(sharedPreferences.getInt(Data.Bandage, 0));
+        shopItems[1].owned = String.valueOf(sharedPreferences.getInt(Data.Pills, 0));
 
-        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, drugType, drugPrice,
-                drugOwned, images, thisActivity);
+        shopItems[0].image = R.drawable.bandage;
+        shopItems[1].image = R.drawable.pills;
+
+        RecyclerViewAdapter recAdapter = new RecyclerViewAdapter(this, shopItems, thisActivity);
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

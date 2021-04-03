@@ -1,15 +1,13 @@
 package com.example.tomogatchi2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.work.Configuration;
-import androidx.work.WorkManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import java.util.concurrent.Executors;
+import com.example.tomogatchi2.Views.NamePet;
 
 public class StartingScreen extends AppCompatActivity {
 

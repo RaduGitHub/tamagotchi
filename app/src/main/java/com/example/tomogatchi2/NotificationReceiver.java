@@ -1,13 +1,13 @@
 package com.example.tomogatchi2;
 
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.tomogatchi2.Services.BackgroundService;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
