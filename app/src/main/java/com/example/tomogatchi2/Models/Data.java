@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Models;
 
 import android.content.SharedPreferences;
 

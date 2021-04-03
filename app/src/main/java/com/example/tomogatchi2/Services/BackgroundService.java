@@ -19,14 +19,14 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.MainActivity;
-import com.example.tomogatchi2.NotificationReceiver;
+import com.example.tomogatchi2.Utils.NotificationReceiver;
 import com.example.tomogatchi2.R;
 
 import java.util.Random;
 
-import static com.example.tomogatchi2.Data.MyPREFERENCES;
+import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
 
 public class BackgroundService extends Service {
     private final LocalBinder mBinder = new LocalBinder();
@@ -107,6 +107,7 @@ public class BackgroundService extends Service {
             SickEventCheck();
             SleepEventCheck();
             CleanEventCheck();
+            happinessController();
 
             eventHandler.postDelayed(this, Data.tick);
         }

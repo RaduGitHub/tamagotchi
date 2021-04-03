@@ -3,8 +3,8 @@ package com.example.tomogatchi2.Controllers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.tomogatchi2.Data;
-import com.example.tomogatchi2.MyContext;
+import com.example.tomogatchi2.Models.Data;
+import com.example.tomogatchi2.Utils.MyContext;
 
 import java.util.Random;
 

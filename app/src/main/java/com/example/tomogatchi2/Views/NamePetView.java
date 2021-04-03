@@ -2,20 +2,17 @@ package com.example.tomogatchi2.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.tomogatchi2.Controllers.NamePetController;
-import com.example.tomogatchi2.Data;
 import com.example.tomogatchi2.MainActivity;
 import com.example.tomogatchi2.R;
 
-public class NamePet extends AppCompatActivity {
+public class NamePetView extends AppCompatActivity {
 
     Button b1;
     NamePetController namePetController;
@@ -37,7 +34,7 @@ public class NamePet extends AppCompatActivity {
                 String name = t.getText().toString();
                 namePetController.namePet(name);
                 Intent intent;
-                intent = new Intent(NamePet.this, MainActivity.class);
+                intent = new Intent(NamePetView.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -8,7 +8,7 @@
 
 
     <application
-        android:name=".MyContext"
+        android:name=".Utils.MyContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,15 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tomogatchi2">
         <activity android:name=".Views.ChoSaysGame"></activity>
-        <activity android:name=".GameSelector" />
+        <activity android:name=".Views.GameSelector" />
         <activity android:name=".Views.CatchChoView" />
         <activity android:name=".Characteristics" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Views.NamePet" />
+        <activity android:name=".Views.NamePetView" />
         <service android:name=".Services.BackgroundService"
             android:enabled="true"/>
         <activity
-            android:name=".Drugstore"
+            android:name=".Views.DrugstoreView"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.Tomogatchi2.NoActionBar" />
         <activity

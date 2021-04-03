@@ -1,17 +1,8 @@
 package com.example.tomogatchi2.Controllers;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.View;
-import android.widget.ImageButton;
 
-import com.example.tomogatchi2.Data;
-import com.example.tomogatchi2.MainActivity;
-
-import java.util.Random;
-import java.util.Timer;
+import com.example.tomogatchi2.Models.Data;
 
 public class CatchChoController {
 
@@ -20,7 +11,7 @@ public class CatchChoController {
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         int happiness = sharedPreferences.getInt(Data.Happiness, 0);
-        if(happiness < 100)
+        if(happiness <= 90)
         {
             happiness  = happiness + 10;
             editor.putInt(Data.Happiness, happiness);

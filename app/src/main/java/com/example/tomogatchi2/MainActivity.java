@@ -18,12 +18,18 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.tomogatchi2.Fragments.SleepFragment;
+import com.example.tomogatchi2.Fragments.StepCounterFragment;
+import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.Services.BackgroundService;
+import com.example.tomogatchi2.Utils.NotificationReceiver;
+import com.example.tomogatchi2.Views.DrugstoreView;
+import com.example.tomogatchi2.Views.GameSelector;
 import com.example.tomogatchi2.Views.Shop;
 
 import java.util.Random;
 
-import static com.example.tomogatchi2.Data.MyPREFERENCES;
+import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
@@ -37,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Context context;
 
-    StepCounter fragment;
+    StepCounterFragment fragment;
     SleepFragment sleepFragment;
 
     Handler eventHandler = new Handler();
@@ -60,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(Data.DaysAlive, (int)(System.currentTimeMillis() - sharedPreferences.getLong(Data.DayBorn, 0)) / 86400000);
         editor.commit();
-        fragment = new StepCounter();
+        fragment = new StepCounterFragment();
         sleepFragment = new SleepFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -137,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ChangeToDrugstore(View view){
-        Intent intent = new Intent(this, Drugstore.class);
+        Intent intent = new Intent(this, DrugstoreView.class);
         startActivity(intent);
     }
 

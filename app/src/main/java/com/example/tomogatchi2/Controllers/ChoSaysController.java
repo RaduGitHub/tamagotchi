@@ -2,7 +2,7 @@ package com.example.tomogatchi2.Controllers;
 
 import android.content.SharedPreferences;
 
-import com.example.tomogatchi2.Data;
+import com.example.tomogatchi2.Models.Data;
 
 public class ChoSaysController {
 
