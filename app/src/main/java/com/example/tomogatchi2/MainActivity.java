@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.tomogatchi2.Services.BackgroundService;
+import com.example.tomogatchi2.Views.Shop;
 
 import java.util.Random;
 

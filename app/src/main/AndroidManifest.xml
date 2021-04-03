@@ -28,7 +28,7 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.Tomogatchi2.NoActionBar" />
         <activity
-            android:name=".Shop"
+            android:name=".Views.Shop"
             android:label="@string/title_activity_shop"
             android:theme="@style/Theme.Tomogatchi2.NoActionBar" />
         <activity android:name=".StartingScreen">
