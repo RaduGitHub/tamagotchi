@@ -18,7 +18,7 @@
         <activity android:name=".Views.ChoSaysGameView"></activity>
         <activity android:name=".Views.GameSelectorView" />
         <activity android:name=".Views.CatchChoView" />
-        <activity android:name=".Characteristics" />
+        <activity android:name=".Views.CharacteristicView" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Views.NamePetView" />
         <service android:name=".Services.BackgroundService"

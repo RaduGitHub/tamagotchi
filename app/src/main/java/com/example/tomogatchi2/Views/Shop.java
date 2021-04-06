@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.tomogatchi2.Controllers.ShopController;
 import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.Models.ShopItem;
 import com.example.tomogatchi2.R;
@@ -28,6 +29,7 @@ public class Shop extends AppCompatActivity {
             R.drawable.soda, R.drawable.hot_dog};*/
     SharedPreferences sharedPreferences;
     Activity thisActivity;
+    ShopController shopController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class Shop extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE);
+        shopController = new ShopController();
 
         recyclerView = findViewById(R.id.recyclerView);
         ShopItem[] shopItem = new ShopItem[6];
@@ -57,19 +60,19 @@ public class Shop extends AppCompatActivity {
         shopItem[4].name = foodType[4];
         shopItem[5].name = foodType[5];
 
-        shopItem[0].price = String.valueOf(sharedPreferences.getInt(Data.PizzaPrice, 0));
-        shopItem[1].price = String.valueOf(sharedPreferences.getInt(Data.IceCreamPrice, 0));
-        shopItem[2].price = String.valueOf(sharedPreferences.getInt(Data.FriesPrice, 0));
-        shopItem[3].price = String.valueOf(sharedPreferences.getInt(Data.CookiePrice, 0));
-        shopItem[4].price = String.valueOf(sharedPreferences.getInt(Data.SodaPrice, 0));
-        shopItem[5].price = String.valueOf(sharedPreferences.getInt(Data.HotDogPrice, 0));
+        shopItem[0].price = shopController.getPizzaPrice();
+        shopItem[1].price = shopController.getIcePrice();
+        shopItem[2].price = shopController.getFriesPrice();
+        shopItem[3].price = shopController.getCookiePrice();
+        shopItem[4].price = shopController.getSodaPrice();
+        shopItem[5].price = shopController.getHotDogPrice();
 
-        shopItem[0].owned = String.valueOf(sharedPreferences.getInt(Data.Pizza, 0));
-        shopItem[1].owned = String.valueOf(sharedPreferences.getInt(Data.IceCream, 0));
-        shopItem[2].owned = String.valueOf(sharedPreferences.getInt(Data.Fries, 0));
-        shopItem[3].owned = String.valueOf(sharedPreferences.getInt(Data.Cookie, 0));
-        shopItem[4].owned = String.valueOf(sharedPreferences.getInt(Data.Soda, 0));
-        shopItem[5].owned = String.valueOf(sharedPreferences.getInt(Data.HotDog, 0));
+        shopItem[0].owned = shopController.getPizzaOwned();
+        shopItem[1].owned = shopController.getIceOwned();
+        shopItem[2].owned = shopController.getFriesOwned();
+        shopItem[3].owned = shopController.getCookieOwned();
+        shopItem[4].owned = shopController.getSodaOwned();
+        shopItem[5].owned = shopController.getHotDogOwned();
 
         shopItem[0].image = R.drawable.pizza;
         shopItem[1].image = R.drawable.ice_cream;

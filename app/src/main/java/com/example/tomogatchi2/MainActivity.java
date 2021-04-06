@@ -23,6 +23,7 @@ import com.example.tomogatchi2.Fragments.StepCounterFragment;
 import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.Services.BackgroundService;
 import com.example.tomogatchi2.Utils.NotificationReceiver;
+import com.example.tomogatchi2.Views.CharacteristicView;
 import com.example.tomogatchi2.Views.DrugstoreView;
 import com.example.tomogatchi2.Views.GameSelectorView;
 import com.example.tomogatchi2.Views.Shop;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ChangeToCharacteristics(View view)
     {
-        Intent intent = new Intent(this, Characteristics.class);
+        Intent intent = new Intent(this, CharacteristicView.class);
         startActivity(intent);
     }
 
