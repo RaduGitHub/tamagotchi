@@ -375,12 +375,24 @@ public class MainActivity extends AppCompatActivity {
             bt.setVisibility(View.INVISIBLE);
             Data.sickActive = false;
             Data.caring = false;
-
         }
     }
 
     public void SleepEventCheck()
     {
+        if(sleepFragment.getSleepCounter() > 10){
+            ImageButton bt = findViewById(R.id.imageButton3);
+            bt.setVisibility(View.INVISIBLE);
+            sleepFragment.resetCounter();
+            Data.sleepActive = false;
+
+            ///
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.hide(sleepFragment);
+            fragmentTransaction.commit();
+            ///
+        }
         if(Data.sleepActive)
         {
             sleepButton();
