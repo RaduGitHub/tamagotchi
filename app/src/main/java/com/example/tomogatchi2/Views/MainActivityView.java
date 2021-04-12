@@ -338,6 +338,7 @@ public class MainActivityView extends AppCompatActivity {
         {
             Data.walkCounter = 0;
             Data.stepsActive = false;
+            Data.walkFinished = false;
 
             ///
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -348,6 +349,8 @@ public class MainActivityView extends AppCompatActivity {
 
             ImageButton bt = findViewById(R.id.imageButton);
             bt.setVisibility(View.INVISIBLE);
+
+            Data.stepCounterLast = fragment.getSteps();
 
         }
         if(Data.stepsActive)

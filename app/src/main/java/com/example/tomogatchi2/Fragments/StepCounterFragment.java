@@ -28,7 +28,7 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
 
     public static final String EXTRA_MESSAGE = "com.example.android.twoactivities.extra.MESSAGE";
     private TextView stepCounter;
-    private TextView stepDetector;
+
     private SensorManager sensorManager;
     private Sensor sensor;
     private boolean counterSensor;
@@ -38,6 +38,11 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     {
         View rootView = inflater.inflate(R.layout.step_counter_fragment, container, false);
         return rootView;
+    }
+
+    public int getSteps()
+    {
+        return stepCount;
     }
 
     @Override
@@ -77,7 +82,7 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor == sensor){
             Log.d("ceva", "onSensorChanged: " + event.values[0]);
-            stepCount = (int) event.values[0];
+            stepCount = (int) event.values[0] - Data.stepCounterLast;
             stepCounter.setText(String.valueOf(stepCount));
             if(stepCount >= 25)
             {
