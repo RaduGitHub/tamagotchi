@@ -25,6 +25,7 @@ public class SleepFragment extends Fragment implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
+    private Integer sleepCounter;
 
     private TextView sleepCondition;
 
@@ -50,11 +51,12 @@ public class SleepFragment extends Fragment implements SensorEventListener {
         super.onActivityCreated(savedInstanceState);
 
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        sleepCounter = 0;
         sleepCondition = (TextView) getActivity().findViewById(R.id.sleepTextView);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
 
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null){
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         }
         else{
             sleepCondition.setText("Light sensor is not working properly");
@@ -85,10 +87,11 @@ public class SleepFragment extends Fragment implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor == sensor){
-            if( (int) event.values[0] < 2000){
-                sleepCondition.setText("d" + event.values[0]);
+            if( (int) event.values[0] < 100){
+                sleepCondition.setText("Sleeping" + event.values[0]);
+                sleepCounter++;
             }else{
-                sleepCondition.setText("u" + event.values[0]);
+                sleepCondition.setText("Not Sleeping" + event.values[0]);
             }
         }
     }
@@ -113,6 +116,10 @@ public class SleepFragment extends Fragment implements SensorEventListener {
             sensorManager.unregisterListener(this, sensor);
         }
     }
+
+    public Integer getSleepCounter(){ return this.sleepCounter; }
+
+    public void resetCounter() { this.sleepCounter = 0; }
 
 
 }
