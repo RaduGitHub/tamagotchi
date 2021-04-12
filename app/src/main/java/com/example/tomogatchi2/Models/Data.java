@@ -14,6 +14,7 @@ public class Data {
     public static boolean cleanActive = false;
     public static boolean feeding = false;
     public static boolean caring = false;
+    public static boolean walkFinished = false;
 
     //sharedpreferences header
     public static final String MyPREFERENCES = "MyPrefs" ;

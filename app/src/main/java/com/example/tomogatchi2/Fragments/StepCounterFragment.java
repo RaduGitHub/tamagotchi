@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.example.tomogatchi2.Models.Data;
 import com.example.tomogatchi2.R;
 
 import org.w3c.dom.Text;
@@ -75,8 +76,13 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor == sensor){
+            Log.d("ceva", "onSensorChanged: " + event.values[0]);
             stepCount = (int) event.values[0];
             stepCounter.setText(String.valueOf(stepCount));
+            if(stepCount >= 25)
+            {
+                Data.walkFinished = true;
+            }
             return;
         }
     }
