@@ -2,13 +2,11 @@ package com.example.tomogatchi2.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.tomogatchi2.Controllers.StartingScreenController;
-import com.example.tomogatchi2.MainActivity;
 import com.example.tomogatchi2.R;
 
 public class StartingScreenView extends AppCompatActivity {
@@ -30,7 +28,7 @@ public class StartingScreenView extends AppCompatActivity {
         }
         else
         {
-            intent = new Intent(StartingScreenView.this, MainActivity.class);
+            intent = new Intent(StartingScreenView.this, MainActivityView.class);
         }
 
         startActivity(intent);

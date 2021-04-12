@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.tomogatchi2.Controllers.NamePetController;
-import com.example.tomogatchi2.MainActivity;
 import com.example.tomogatchi2.R;
 
 public class NamePetView extends AppCompatActivity {
@@ -34,7 +33,7 @@ public class NamePetView extends AppCompatActivity {
                 String name = t.getText().toString();
                 namePetController.namePet(name);
                 Intent intent;
-                intent = new Intent(NamePetView.this, MainActivity.class);
+                intent = new Intent(NamePetView.this, MainActivityView.class);
                 startActivity(intent);
                 finish();
             }
