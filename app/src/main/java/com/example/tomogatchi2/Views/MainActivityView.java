@@ -1,4 +1,4 @@
-package com.example.tomogatchi2;
+package com.example.tomogatchi2.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -18,9 +18,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.tomogatchi2.Controllers.MainActivityController;
 import com.example.tomogatchi2.Fragments.SleepFragment;
 import com.example.tomogatchi2.Fragments.StepCounterFragment;
 import com.example.tomogatchi2.Models.Data;
+import com.example.tomogatchi2.R;
 import com.example.tomogatchi2.Services.BackgroundService;
 import com.example.tomogatchi2.Utils.NotificationReceiver;
 import com.example.tomogatchi2.Views.CharacteristicView;
@@ -32,7 +34,7 @@ import java.util.Random;
 
 import static com.example.tomogatchi2.Models.Data.MyPREFERENCES;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityView extends AppCompatActivity {
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
     private static final int NOTIFICATION_ID = 0;
     private static final String ACTION_UPDATE_NOTIFICATION =
@@ -41,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     //public static final String MyPREFERENCES = "MyPrefs" ;
     //public static final String Name = "nameKey";
     TextView Money;
-    SharedPreferences sharedPreferences;
     Context context;
+    MainActivityController mainActivityController;
 
     StepCounterFragment fragment;
     SleepFragment sleepFragment;
@@ -62,27 +64,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivityController = new MainActivityController();
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Data.DaysAlive, (int)(System.currentTimeMillis() - sharedPreferences.getLong(Data.DayBorn, 0)) / 86400000);
-        editor.commit();
+        mainActivityController.TimeAlive();
+
         fragment = new StepCounterFragment();
         sleepFragment = new SleepFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
         addFragment(fragment);
         addFragment(sleepFragment);
 
-        eventHandler.postDelayed(eventController, 0);
-        //createNotificationChannel();
-        //mReceiver = new NotificationReceiver();
-        //registerReceiver(mReceiver,new IntentFilter(ACTION_UPDATE_NOTIFICATION));
         BackgroundService service = new BackgroundService();
         Intent serviceIntent = new Intent(this, BackgroundService.class);
+        eventHandler.postDelayed(eventController, 0);
         if(!isMyServiceRunning(service.getClass()))
         {
             startService(serviceIntent);
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         Money = (TextView)findViewById(R.id.textView3);
-        Money.setText(String.valueOf(sharedPreferences.getInt(Data.Money, 0)));
+        Money.setText(mainActivityController.GetMoney());
     }
 
     public void IncreaseCoin(View view){
@@ -131,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             Money.setText(String.valueOf(Integer.parseInt(Money.getText().toString()) + 1));
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(Data.Money, Integer.parseInt(Money.getText().toString()));
-            editor.commit();
+            mainActivityController.SetMoney(Money.getText().toString());
+
         }
 
     }
@@ -283,22 +279,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void happinessController()
     {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        int happiness = sharedPreferences.getInt(Data.Happiness, 0);
+        int happiness = mainActivityController.GetHappines();
         Log.d("HAPPENED", "happy " + happiness);
         if(happiness > 1)
         {
             happiness  = happiness - 1;
-            editor.putInt(Data.Happiness, happiness);
+            mainActivityController.IncreaseHappiness(happiness);
         }
-        editor.commit();
+
     }
 
     private Runnable eventController = new Runnable()
     {
         public void run()
         {
-            incrementEventTimers();
+            mainActivityController.incrementEventTimers();
             EventsCheck();
             //happinessController();
             i++;
@@ -307,34 +302,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void incrementEventTimers()
-    {
-        if(Data.sleepActive == false)
-        {
-            Data.sleepCounter++;
-        }
 
-        if(Data.foodActive == false)
-        {
-            Data.foodCounter++;
-        }
-
-        if(Data.stepsActive == false)
-        {
-            Data.walkCounter++;
-        }
-
-        if(Data.sickActive == false)
-        {
-            Data.sickCounter++;
-        }
-
-        if(Data.cleanActive == false)
-        {
-            Data.cleanCounter++;
-        }
-
-    }
 
     public void EventsCheck()
     {

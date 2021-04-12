@@ -20,7 +20,7 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 
 import com.example.tomogatchi2.Models.Data;
-import com.example.tomogatchi2.MainActivity;
+import com.example.tomogatchi2.Views.MainActivityView;
 import com.example.tomogatchi2.Utils.NotificationReceiver;
 import com.example.tomogatchi2.R;
 
@@ -188,7 +188,7 @@ public class BackgroundService extends Service {
     }
 
     public void sendNotification(String title, String text, int id) {
-        Intent updateIntent = new Intent(this, MainActivity.class);
+        Intent updateIntent = new Intent(this, MainActivityView.class);
         PendingIntent updatePendingIntent = PendingIntent.getActivity(this, 0, updateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder(title, text);

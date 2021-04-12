@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.tomogatchi2.Controllers.CatchChoController;
 import com.example.tomogatchi2.Models.Data;
-import com.example.tomogatchi2.MainActivity;
 import com.example.tomogatchi2.R;
 
 import java.util.Random;
@@ -64,7 +63,7 @@ public class CatchChoView extends AppCompatActivity {
                         .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(thisActivity, MainActivity.class);
+                                Intent intent = new Intent(thisActivity, MainActivityView.class);
                                 startActivity(intent);
                             }
                         })
