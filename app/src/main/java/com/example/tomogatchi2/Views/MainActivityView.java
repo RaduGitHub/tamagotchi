@@ -178,6 +178,10 @@ public class MainActivityView extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+                if(sleepFragment.isVisible()){
+                    fragmentTransaction.hide(sleepFragment);
+                }
+
                 fragmentTransaction.show(fragment);
                 Data.fragments += 1;
                 fragmentTransaction.commit();
@@ -195,6 +199,10 @@ public class MainActivityView extends AppCompatActivity {
             {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                if(fragment.isVisible()) {
+                    fragmentTransaction.hide(fragment);
+                }
 
                 fragmentTransaction.show(sleepFragment);
                 fragmentTransaction.commit();
@@ -364,7 +372,7 @@ public class MainActivityView extends AppCompatActivity {
 
     public void SleepEventCheck()
     {
-        if(sleepFragment.getSleepCounter() > 10){
+        if(sleepFragment.getSleepCounter() > 1000){
             ImageButton bt = findViewById(R.id.imageButton3);
             bt.setVisibility(View.INVISIBLE);
             sleepFragment.resetCounter();
