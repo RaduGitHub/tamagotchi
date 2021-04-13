@@ -29,10 +29,6 @@ public class SleepFragment extends Fragment implements SensorEventListener {
 
     private TextView sleepCondition;
 
-    public SleepFragment() {
-
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -88,10 +84,10 @@ public class SleepFragment extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor == sensor){
             if( (int) event.values[0] < 100){
-                sleepCondition.setText("Sleeping" + event.values[0]);
+                sleepCondition.setText("Sleeping");
                 sleepCounter++;
             }else{
-                sleepCondition.setText("Not Sleeping" + event.values[0]);
+                sleepCondition.setText("Too much light");
             }
         }
     }
