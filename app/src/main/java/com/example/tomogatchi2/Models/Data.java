@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 
 public class Data {
 
-    public static int foodCounter, sleepCounter, walkCounter, sickCounter, cleanCounter;
+    public static int foodCounter, sleepCounter, walkCounter, sickCounter, cleanCounter, stepCounterLast = 0;
     public static int tick = 2000;
 
     public static boolean stepsActive = false;
@@ -14,6 +14,7 @@ public class Data {
     public static boolean cleanActive = false;
     public static boolean feeding = false;
     public static boolean caring = false;
+    public static boolean walkFinished = false;
 
     //sharedpreferences header
     public static final String MyPREFERENCES = "MyPrefs" ;

@@ -334,6 +334,25 @@ public class MainActivityView extends AppCompatActivity {
 
     public void WalkEventCheck()
     {
+        if(Data.walkFinished == true)
+        {
+            Data.walkCounter = 0;
+            Data.stepsActive = false;
+            Data.walkFinished = false;
+
+            ///
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.hide(fragment);
+            fragmentTransaction.commit();
+            ///
+
+            ImageButton bt = findViewById(R.id.imageButton);
+            bt.setVisibility(View.INVISIBLE);
+
+            Data.stepCounterLast = fragment.getSteps();
+
+        }
         if(Data.stepsActive)
         {
             walkButton();
